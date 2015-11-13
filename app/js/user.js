@@ -4,7 +4,7 @@ userApp.controller('UserController', function ($scope, $mdDialog) {
     $scope.user = {
         firstName: 'Romain',
         lastName: 'POUSSIN',
-        login: 'RomainPoussin',
+        login: 'Romain_Poussin',
         email: 'romain.poussin@ynov.com',
         image: 'img/romainPoussin.png',
         description: 'Je suis un freelance depuis deux ans.'
