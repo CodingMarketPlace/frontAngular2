@@ -22,35 +22,35 @@
             <md-input-container style="margin-bottom: 0px;">
                 <input type="search" 
                        placeholder="Rechercher un projet"
-                       ng-if="user.login !== undefined">
+                       ng-if="user['Login'] !== undefined">
             </md-input-container>
             <md-icon md-svg-src="img/icons/search.svg" 
                      aria-label="search project"
-                     ng-if="user.login !== undefined">
+                     ng-if="user['Login'] !== undefined">
             </md-icon>
             <span flex></span>
             <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="user.login !== undefined">
+                ng-if="user['Login'] !== undefined">
                 Créer un projet
             </md-button>
             <md-button 
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
-                ng-if="user.login === undefined">
+                ng-if="user['Login'] === undefined">
                 Connexion
             </md-button>
             <md-button 
                 aria-label="Inscription"
                 ng-click="showDialogInscription($event)"
-                ng-if="user.login === undefined">
+                ng-if="user['Login'] === undefined">
                 Inscription
             </md-button>
             <md-button
                 aria-label="Déconnexion"
                 ng-click="logOut()"
-                ng-if="user.login !== undefined">
+                ng-if="user['Login'] !== undefined">
                 Déconnexion
             </md-button>
         </div>
