@@ -40,8 +40,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
 /////////////////////////////
 
     $scope.connection = function () {
-        console.log('toto');
-        var identification = {pass: $scope.user.password, login: $scope.user.mail};
+        var identification = {password: $scope.user.password, login: $scope.user.mail};
         var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification);
         res.success(function (data, status, headers, config) {
             $scope.user = data;
