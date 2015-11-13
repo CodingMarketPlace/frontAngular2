@@ -40,13 +40,15 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
 /////////////////////////////
 
     $scope.connection = function () {
-        console.log('toto');
-        $http.post('http://codingmarketplace.apphb.com/api/Users/Login', {
-            params: {pass: $scope.user.password, login: $scope.user.mail}
-        }).
-                then(function (resp) {
-                    console.log(resp);
-                });
+        var identification = {password: $scope.user.password, login: $scope.user.mail};
+        var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification);
+        res.success(function (data, status, headers, config) {
+            $scope.user = data;
+            console.log($scope.user);
+        });
+        res.error(function (data, status, headers, config) {
+            console.log("failure message: " + JSON.stringify({data: data}));
+        });
     };
 
 
