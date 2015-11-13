@@ -1,3 +1,14 @@
+<script type="text/javascript">
+      
+      var onloadCallback = function() {
+      captchaContainer = grecaptcha.render('recaptcha', {
+        'sitekey' : '6Le76BATAAAAAJlBIidxKGSdjWzvhHcnT9KdSYIf',
+        
+      });
+    };
+    alert('coucou');
+    </script>
+
 <md-dialog aria-label="Inscription"  ng-cloak>
         <md-dialog-content layout-padding layout="column">
             <span layout-gt-sm="row">
@@ -48,7 +59,7 @@
                 </md-input-container>
             </span>
             <span layout-gt-sm="row">
-                <!--Captcha Google-->
+                <div id="recaptcha" ></div>
             </span>
             <span layout-gt-sm="row">
                 <input type="checkbox" ng-model="agreecondition" aria-label="Agree conditions" ng-required="agreecondition === true">
@@ -58,3 +69,6 @@
             <md-button class="md-primary md-raised">Incription</md-button>
         </md-dialog-content>
 </md-dialog>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
