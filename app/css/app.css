@@ -186,3 +186,19 @@ md-content {
     height: 4px;
     border-top: 3px solid #eee;
 }
+
+/** PROJECT DESCRIPTION CSS **/
+.descProject {
+    background: #fff;
+}
+
+.descProject h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #3e3e3e;
+}
+
+.descProject p.descLeader {
+    font-weight: bold;
+    color: #828282;
+}
