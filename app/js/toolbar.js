@@ -1,17 +1,30 @@
 var toolbarApp = angular.module('toolbarApp', []);
 
+toolbarApp.config(function ($httpProvider) {
+    //Enable cross domain calls
+    $httpProvider.defaults.useXDomain = true;
+    //Remove the header used to identify ajax call  that would prevent CORS from working
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+});
+
 toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
     $scope.status = '';
 
     $scope.user = {
-        login: undefined,
-        password: undefined,
-        mail: undefined,
-        firstname: undefined,
-        lastname: undefined,
+        Login: undefined,
+        Password: undefined,
+        Email: undefined,
+        FirstName: undefined,
+        LastName: undefined,
         verif_password: undefined,
-        typeaccount: undefined,
-        validated: undefined
+        Developper: undefined,
+        Activated: undefined,
+        Admin: undefined,
+        Description: undefined,
+        Id: undefined,
+        ImageUrl: undefined,
+        ProjectCreator: undefined,
+        UniqId: undefined
     };
 
 
@@ -33,13 +46,17 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
 /////////////////////////////
 
     $scope.connection = function () {
-        console.log('toto');
-        $http.get('http://codingmarketplace.apphb.com/api/Users/Login', {
-            params: {pass: $scope.user.password, login: $scope.user.mail}
-        }).
-                then(function (resp) {
-                    console.log(resp);
-                });
+        var identification = {password: $scope.user.password, login: $scope.user.mail};
+        var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification);
+        res.success(function (data) {
+            $scope.user = data;
+            console.log("data : " + data);
+            console.log("user" + $scope.user);
+            console.log("user.login" + $scope.user['Login']);
+        });
+        res.error(function (data, status, headers, config) {
+            console.log("failure message: " + JSON.stringify({data: data}));
+        });
     };
 
 

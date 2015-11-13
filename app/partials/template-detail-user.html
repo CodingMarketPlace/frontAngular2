@@ -12,7 +12,7 @@
                     <label>Description de l'utilisateur</label>
                     <p flex>{{user.description}}</p>
                 </span>
-                <md-button class="md-raised md-primary">Contacter {{user.firstName}}</md-button>
+                <md-button class="md-raised md-primary" ng-click="showDialogContact($event)">Contacter {{user.firstName}}</md-button>
             </div>
         </div>    
     </div>
