@@ -1,0 +1,24 @@
+<div layout-margin layout-padding layout-wrap ng-controller="ProjectController">
+    <div layout-gt-sm="column">
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img src="{{projet.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h3 flex>{{projet.name}}</h3>
+                <p flex>Par {{projet.leader}}</p>
+                <span flex>
+                    <md-icon md-svg-src="img/icons/calendar.svg"></md-icon>
+                    Durée estimée : {{projet.delay}} jours
+                </span>
+                <span flex="100">
+                    <md-icon md-svg-src="img/icons/ticket.svg"></md-icon>
+                    Budget disponible : {{projet.budget}} 
+                    <md-icon md-svg-src="img/icons/money.svg"></md-icon>
+                </span>
+                <span flex="100">
+                    <label>Description</label>
+                    <p flex>{{projet.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
+            </div>
+        </div>    
+    </div>

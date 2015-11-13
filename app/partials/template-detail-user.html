@@ -1,0 +1,102 @@
+
+
+<div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="UserController">
+    <h2>Détails du compte</h2>
+    <div layout-gt-sm="column">
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img class="roundedMediumImage" src="{{user.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h3>{{user.firstName}} {{user.lastName}} <span>({{user.login}})</span></h3>
+                <h4 flex>{{user.email}}</h4>
+                <span flex="100">
+                    <label>Description de l'utilisateur</label>
+                    <p flex>{{user.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">Contacter {{user.firstName}}</md-button>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="ProjectController">
+    <h2>Projets en cours</h2>
+    <h3>{{user.firstName}} postule actuellement pour les projets suivants :</h3>
+    <div layout-gt-sm="column">
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img src="{{projet.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h4 class="projectName">{{projet.name}}</h4>
+                <span flex="100">
+                    <label>Description</label>
+                    <p flex>{{projet.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">
+                    <a ng-href="#/projects/{{projet.id}}" 
+                       layout-align="bottom left">
+                        Voir les détails du projet
+                    </a>
+                </md-button>
+            </div>
+        </div>
+        <hr />
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img src="{{projet.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h4 class="projectName">{{projet.name}}</h4>
+                <span flex="100">
+                    <label>Description</label>
+                    <p flex>{{projet.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">
+                    <a ng-href="#/projects/{{projet.id}}" 
+                       layout-align="bottom left">
+                        Voir les détails du projet
+                    </a>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="ProjectController">
+    <h2>Projets terminés</h2>
+    <h3>{{user.firstName}} a réalisé les projets suivants :</h3>
+    <div layout-gt-sm="column">
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img src="{{projet.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h4 class="projectName">{{projet.name}}</h4>
+                <span flex="100">
+                    <label>Description</label>
+                    <p flex>{{projet.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">
+                    <a ng-href="#/projects/{{projet.id}}" 
+                       layout-align="bottom left">
+                        Voir les détails du projet
+                    </a>
+                </md-button>
+            </div>
+        </div>
+        <hr />
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img src="{{projet.image}}" flex-gt="50" flex-sm="100">
+            <div layout="column" layout-wrap>
+                <h4 class="projectName">{{projet.name}}</h4>
+                <span flex="100">
+                    <label>Description</label>
+                    <p flex>{{projet.description}}</p>
+                </span>
+                <md-button class="md-raised md-primary">
+                    <a ng-href="#/projects/{{projet.id}}" 
+                       layout-align="bottom left">
+                        Voir les détails du projet
+                    </a>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</div>
+

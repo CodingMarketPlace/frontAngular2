@@ -1,0 +1,188 @@
+/* app css stylesheet */
+
+.thumb {
+    float: left;
+    margin: -0.5em 1em 1.5em 0;
+    padding-bottom: 1em;
+    height: 100px;
+    width: 100px;
+}
+
+h1 {
+    border-bottom: 1px solid gray;
+}
+
+md-toolbar > div > md-button > md-icon {
+    color: white;
+}
+
+#templateindexcard > md-card-content {
+    background-color: whitesmoke;
+}
+
+#inscriptionBar {
+    background-image: url('../img/fond.jpg');
+    height: 200px;
+}
+
+#inscriptionBar > h2 {
+    margin: 0;
+    font-size:4em;
+}
+
+#inscriptionBar > .md-button {
+    background: #f44336;
+    font-size: 1.5em;
+    padding: 20px;
+    margin-left: 30%;
+}
+
+.bt_inscription {
+    margin-left: 50%;
+    width: 200px;
+    height: 80px;
+}
+
+.roundedSmallImage{
+    overflow:hidden;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width:90px;
+    height:90px;
+    background-color: rgb(63,81,181);
+}
+
+.roundedMediumImage{
+    overflow:hidden;
+    -webkit-border-radius:170px;
+    -moz-border-radius:170px;
+    border-radius:170px;
+    width:280px;
+    height:280px;
+}
+
+.roundedTallImage{
+    overflow:hidden;
+    -webkit-border-radius:250px;
+    -moz-border-radius:250px;
+    border-radius:250px;
+    border: 3px solid rgb(230,230,230);
+    width:300px;
+    height:300px;
+}
+
+/*Caroussel Bootstrap*/
+.carousel-inner > .item > img,
+.carousel-inner > .item-active > img {
+    height: 100%;
+    width: 100%;
+    margin-top: -240px;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-caption {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.carousel-caption > .md-button {
+    background: none;
+    border: #fff 1px solid;
+    color: #fff;
+    font-size: 2em;
+}
+
+.carousel-caption > .md-button:hover {
+    color: #000;
+}
+
+#myCarousel {
+    height: 700px;
+}
+@media screen and (max-width: 600px){
+    #myCarousel {
+        height: 200px;
+    }
+}
+
+#qualitysite {
+    background: #F8F8FF;
+    margin:0;
+    font-size: 3em;
+    color: #808080;
+}
+
+#testimonial {
+    font-size: 3em;
+    color: #808080;
+}
+
+footer {
+    background: #DCDCDC;
+}
+
+md-toolbar > div > md-input-container > label,
+md-toolbar > div > md-input-container > input
+{
+    color: #fff !important;
+}
+
+.error {
+    color: red;
+}
+
+
+#template-projects > h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+md-content {
+    min-width: 100%;
+    min-height: 100%;
+    background: #eeeeee;
+}
+
+/** ACCOUNT CSS **/
+.account {
+    width: 75%;
+    margin: 1% auto auto auto;
+    background: #fff;
+}
+
+.account > h2 {
+    background-color: rgb(63,81,181);
+    color: #fff;
+    margin: 0;
+}
+
+.account h3 {
+    font-weight: bold;
+    color: #3e3e3e;
+    text-transform: uppercase;
+}
+
+.account h3 > span, .account h4 {
+    color: #828282;
+}
+
+.account h4.projectName {
+    text-transform: uppercase;
+    font-weight: bold; 
+}
+
+.account a {
+    color: #fff;
+}
+
+.account hr {
+    width: 20%;
+    height: 4px;
+    border-top: 3px solid #eee;
+}

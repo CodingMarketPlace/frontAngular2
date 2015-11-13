@@ -1,0 +1,97 @@
+<!--<md-card id="templateindexcard" ng-cloak class="md-whiteframe-z2" ng-controller="ToolbarCtrl">-->
+<div>
+    <div id="myCarousel" 
+         class="carousel slide" 
+         data-ride="carousel" 
+         ng-controller="ToolbarCtrl">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" 
+                data-slide-to="0" 
+                class="active"></li>
+            <li data-target="#myCarousel" 
+                data-slide-to="1">
+            </li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" 
+             role="listbox">
+            <div class="item active">
+                <div class="carousel-caption">
+                    <h2>Découvrez un réseau unique de professionnels et réussisez tous vos projets.</h2>
+                    <md-button class="md-raised" 
+                               aria-label="Inscription" 
+                               ng-click="showDialogInscription($event)">
+                        Inscrivez-vous
+                    </md-button>
+                </div>
+                <img src="img/home-office.jpg" alt="Home office">
+
+            </div>
+
+            <div class="item">
+                <img src="img/relation_pro.jpg" alt="Relation professionnel">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="qualitysite" 
+     layout="row" 
+     layout-sm="column" 
+     layout-margin 
+     layout-padding 
+     layout-wrap 
+     style="text-align:center;">
+    <!--<md-button ng-href="#/projects" href="projects">projets</md-button>-->
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/relation.jpg"/>
+        <p>Un réseau unique de professionnels aguéris</p>
+    </div>
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/search.jpg"/>
+        <p>Un recrutement simple et plus rapide</p>
+    </div>
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/rocket.jpg"/>
+        <p>Un tremplin vers la réussite de votre projet</p>
+    </div>
+</div>
+
+<div flex layout="row" 
+     layout-sm="column" 
+     layout-align="center center" 
+     id="inscriptionBar" 
+     ng-controller="ToolbarCtrl">
+    <h2 style="color: white;text-align: center;">Venez proposer votre projet.</h2>
+    <md-button class="md-raised md-primary" 
+               ng-click="showDialogInscription($event)">
+        Inscrivez-vous
+    </md-button>
+</div>
+
+<div layout-gt-sm="row" 
+     layout-padding 
+     layout-wrap 
+     id="testimonial">
+
+    <div flex="25" flex-sm="100">
+        <img flex 
+             layout-align="center center" 
+             class="roundedTallImage" 
+             src="img/temoignage.jpg" 
+             style="margin-left: 16%; "/>
+    </div>
+    <div flex="75" 
+         flex-sm="100" 
+         layout="column" 
+         layout-align="center center">
+        J'avais besoin de quelqu'un pour créer un site d'e-commerce.
+        Je l'ai trouvé en moins de 2 jours !
+    </div>
+
+</div>
+
+<!--</md-card>-->

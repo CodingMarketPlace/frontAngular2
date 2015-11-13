@@ -1,0 +1,60 @@
+<md-dialog aria-label="Inscription"  ng-cloak>
+        <md-dialog-content layout-padding layout="column">
+            <span layout-gt-sm="row">
+                <md-input-container flex-gt-sm="25">
+                    <label>Prénom *</label>
+                    <md-icon md-svg-src="img/icons/person.svg" style="color: #7CFC00;"></md-icon>
+                    <input ng-model="firstname" placeholder="Prénom" required>
+                </md-input-container>
+                <md-input-container flex-gt-sm="25">
+                    <label>Nom *</label>
+                    <input ng-model="lastname" placeholder="Nom" required>
+                </md-input-container>
+                <md-input-container flex-gt-sm="50">
+                    <label>Login *</label>
+                    <input ng-model="login" placeholder="Login" required>
+                </md-input-container>
+            </span>
+            <span layout-gt-sm="row" layout-wrap>
+                <md-input-container flex="60">
+                    <label>Adresse e-mail *</label>
+                    <md-icon md-svg-src="img/icons/mail.svg" style="color: #1E90FF;"></md-icon>
+                    <input type="email" ng-model="mail" placeholder="Adresse e-mail" required>
+                </md-input-container>
+            </span>
+            <span layout-gt-sm="row" layout-wrap>
+                <md-input-container flex="50">
+                    <label>Mot de passe *</label>
+                    <md-icon md-svg-src="img/icons/password.svg" style="color: #FF8C00;"></md-icon>
+                    <input ng-model="password" placeholder="Mot de passe" required>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Vérification du mot de passe *</label>
+                    <input ng-model="verif_password" placeholder="Vérification du mot de passe" compare-to="password">
+                    <p ng-if="verif_password !== password" class="error">Les mots de passe doivent être identiques </p>
+                </md-input-container>
+            </span>
+            <span layout-gt-sm="row">
+                <md-input-container flex>
+                    <label>Type de compte *</label>
+                    <md-select ng-model="typeaccount">
+                        <md-option ng-selected="true">
+                            Porteur de projet
+                        </md-option>
+                        <md-option>
+                            Développeur
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </span>
+            <span layout-gt-sm="row">
+                <!--Captcha Google-->
+            </span>
+            <span layout-gt-sm="row">
+                <input type="checkbox" ng-model="agreecondition" aria-label="Agree conditions" ng-required="agreecondition === true">
+                <p>J'accepte les conditions générales d'utilisation *</p>
+            </span>
+            <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
+            <md-button class="md-primary md-raised">Incription</md-button>
+        </md-dialog-content>
+</md-dialog>

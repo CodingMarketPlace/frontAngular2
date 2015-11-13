@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"  ng-app="CodingMarketPlaceApp" ng-cloak>
+    <head>
+        <meta charset="utf-8">
+        <title>Coding Market Place</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+        <link rel="stylesheet" href="css/app.css"/>
+    </head>
+    <body id="allProjects">
+    <md-toolbar id="toolbar"
+                ng-controller="ToolbarCtrl">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" 
+                       aria-label="Menu">
+                <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <h2>
+                <span><a href="#/">Coding Market Place</a></span>
+            </h2>
+            <span flex></span>
+            <md-input-container style="margin-bottom: 0px;">
+                <input type="search" 
+                       placeholder="Rechercher un projet"
+                       ng-if="user.login !== undefined">
+            </md-input-container>
+            <md-icon md-svg-src="img/icons/search.svg" 
+                     aria-label="search project"
+                     ng-if="user.login !== undefined">
+            </md-icon>
+            <span flex></span>
+            <md-button 
+                aria-label="Créer un projet" 
+                ng-click="showDialogProjectCreate($event)"
+                ng-if="user.login !== undefined">
+                Créer un projet
+            </md-button>
+            <md-button 
+                aria-label="Connexion" 
+                ng-click="showDialogConnect($event)" 
+                ng-if="user.login === undefined">
+                Connexion
+            </md-button>
+            <md-button 
+                aria-label="Inscription"
+                ng-click="showDialogInscription($event)"
+                ng-if="user.login === undefined">
+                Inscription
+            </md-button>
+            <md-button
+                aria-label="Déconnexion"
+                ng-click="logOut()"
+                ng-if="user.login !== undefined">
+                Déconnexion
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="view-container" ng-view>
+    </md-content>
+
+    <div flex>
+        <footer>
+            <a href="">Contactez-nous !</a>
+            <a href="#/legal-notice">Mentions légales</a>
+            <div>Conding Market Place - © PREB S.A.S.</div>
+        </footer>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/toolbar.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/project.js"></script>
+    <script src="js/user.js"></script>
+</body>
+</html>
