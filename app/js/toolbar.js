@@ -7,8 +7,10 @@ toolbarApp.config(function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
+toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http) {
     $scope.status = '';
+
+    $rootScope.loggedIn = false;
 
     $scope.user = {
         Login: undefined,
@@ -47,14 +49,13 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $mdDialog, $http) {
 
     $scope.connection = function () {
         var identification = {password: $scope.user.password, login: $scope.user.mail};
-        var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification);
-        res.success(function (data) {
+        var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
             $scope.user = data;
             console.log("data : " + data);
-            console.log("user" + $scope.user);
-            console.log("user.login" + $scope.user['Login']);
-        });
-        res.error(function (data, status, headers, config) {
+            console.log("user : " + $scope.user);
+            console.log("user.login : " + $scope.user['Login']);
+            $rootScope.loggedIn = true;
+        }).error(function (data, status, headers, config) {
             console.log("failure message: " + JSON.stringify({data: data}));
         });
     };
