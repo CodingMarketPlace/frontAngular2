@@ -19,38 +19,41 @@
                 <span><a href="#/">Coding Market Place</a></span>
             </h2>
             <span flex></span>
-            <md-input-container style="margin-bottom: 0px;">
-                <input type="search" 
+            <md-input-container style="margin-bottom: 0px;" 
+                                ng-if="loggedIn === true">
+                <input type="search"
                        placeholder="Rechercher un projet"
-                       ng-if="loggedIn !== false">
+                       ng-if="loggedIn === true"
+                       ng-model="searchText">
             </md-input-container>
             <md-icon md-svg-src="img/icons/search.svg" 
                      aria-label="search project"
-                     ng-if="loggedIn !== false">
+                     ng-click="search()"
+                     ng-if="loggedIn === true">
             </md-icon>
             <span flex></span>
             <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn !== false">
+                ng-if="loggedIn === true">
                 Créer un projet
             </md-button>
             <md-button 
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
-                ng-if="loggedIn === false">
+                ng-if="loggedIn !== true">
                 Connexion
             </md-button>
             <md-button 
                 aria-label="Inscription"
                 ng-click="showDialogInscription($event)"
-                ng-if="loggedIn === false">
+                ng-if="loggedIn !== true">
                 Inscription
             </md-button>
             <md-button
                 aria-label="Déconnexion"
                 ng-click="logOut()"
-                ng-if="loggedIn !== false">
+                ng-if="loggedIn === true">
                 Déconnexion
             </md-button>
         </div>

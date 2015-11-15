@@ -8,13 +8,13 @@
           layout-wrap 
           layout-margin
           layout-padding 
-          layout-align="space-around center">
+          layout-align="space-around left">
         <md-card-content class="md-whiteframe-z1" 
                          ng-repeat="projet in projects" 
                          layout-margin
                          layout-padding
                          flex-gt-sm="40" 
-                         style="background-color: #F8F8FF;">
+                         style="background-color: #F8F8FF; word-break: break-all;">
             <img src="{{projet.image}}" alt="Image du projet" style="width: 200px; height: 200px;"/>
             <p>{{projet.name}}</p>
             <p>Par {{projet.leader}} 

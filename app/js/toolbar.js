@@ -1,4 +1,4 @@
-var toolbarApp = angular.module('toolbarApp', []);
+    var toolbarApp = angular.module('toolbarApp', []);
 
 toolbarApp.config(function ($httpProvider) {
     //Enable cross domain calls
@@ -7,10 +7,11 @@ toolbarApp.config(function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http) {
+toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location) {
     $scope.status = '';
 
     $rootScope.loggedIn = false;
+    $scope.searchText = undefined;
 
     $scope.user = {
         Login: undefined,
@@ -55,12 +56,24 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             console.log("user : " + $scope.user);
             console.log("user.login : " + $scope.user['Login']);
             $rootScope.loggedIn = true;
-        }).error(function (data, status, headers, config) {
+            $scope.hide();
+        }).error(function (data) {
             console.log("failure message: " + JSON.stringify({data: data}));
+            $rootScope.loggedIn = "error";
         });
     };
-
-
+    
+    $scope.logOut = function () {
+        $rootScope.loggedIn  = false;
+        $scope.user = undefined;
+        console.log($rootScope.loggedIn);
+    };
+    
+    $scope.search = function () {
+      $location.path('#/');
+    };
+    
+    
     $scope.showAlert = function (ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
