@@ -11,6 +11,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.status = '';
 
     $rootScope.loggedIn = false;
+    $scope.erreur = false;
     $scope.searchText = undefined;
 
     $scope.user = {
@@ -50,7 +51,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 
     $scope.connection = function () {
         var identification = {password: $scope.user.password, login: $scope.user.mail};
-        var res = $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
+        $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
             $scope.user = data;
             console.log("data : " + data);
             console.log("user : " + $scope.user);
@@ -58,8 +59,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $rootScope.loggedIn = true;
             $scope.hide();
         }).error(function (data) {
+            $scope.erreur = true;
             console.log("failure message: " + JSON.stringify({data: data}));
-            $rootScope.loggedIn = "error";
         });
     };
     
