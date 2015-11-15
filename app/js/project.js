@@ -1,13 +1,16 @@
 var projectApp = angular.module('projectApp', []);
 
-projectApp.controller('ProjectController', function ($scope) {
-    $scope.projet = {
-        name: 'projet de test',
-        leader: 'POUSSIN Romain',
-        delay: '150',
-        budget: '12500',
-        image: 'img/arton.jpg',
-        description: 'Ce projet a pour but de réaliser un site Web mettant en relation des porteurs de projet et des développeurs Freelance pour leur réalisation',
-        id: 14
-    };
+projectApp.controller('ProjectController', function ($scope, $http, $routeParams, $rootScope, $cookies) {
+    $scope.IdProject = $routeParams.projectId;
+    
+    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    
+    $scope.projet = loadProjectDetail ();
+    
+    function loadProjectDetail() {
+        $http.get('http://codingmarketplace.apphb.com/api/Projects/Detail/' + $scope.IdProject).success(function (data) {
+           console.log('data : ' + data);
+           $scope.projet = data;
+        });
+    }
 });

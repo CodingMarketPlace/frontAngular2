@@ -5,10 +5,12 @@
 var codingMarketPlaceApp = angular.module('CodingMarketPlaceApp', [
     'ngRoute',
     'ngMaterial',
+    'ngCookies',
     'toolbarApp',
     'projectsApp',
     'projectApp',
-    'userApp'
+    'userApp',
+    'adminApp'
 ]);
 
 codingMarketPlaceApp.config(function ($routeProvider) {
@@ -17,7 +19,7 @@ codingMarketPlaceApp.config(function ($routeProvider) {
                 templateUrl: 'partials/template-index.html',
                 controller: ''
             }).
-            when('/projects', {
+            when('/search-projects/:key?', {
                 templateUrl: 'partials/template-projects.html',
                 controller: 'ProjectsController'
             }).
@@ -32,6 +34,14 @@ codingMarketPlaceApp.config(function ($routeProvider) {
             when('/user/:userId', {
                 templateUrl: 'partials/template-detail-user.html',
                 controller: 'UserController'
+            }).
+            when('/admin', {
+                templateUrl: 'partials/admin/template-choice-module.html',
+                controller: 'AdminController'
+            }).
+            when('/admin/user-management', {
+                templateUrl: 'partials/admin/user-management.html',
+                controller: 'AdminController'
             }).
             otherwise({
                 redirectTo: '/'

@@ -22,9 +22,9 @@
             <md-input-container style="margin-bottom: 0px;" 
                                 ng-if="loggedIn === true">
                 <input type="search"
+                       ng-model="searchText"
                        placeholder="Rechercher un projet"
-                       ng-if="loggedIn === true"
-                       ng-model="searchText">
+                       ng-if="loggedIn === true">
             </md-input-container>
             <md-icon md-svg-src="img/icons/search.svg" 
                      aria-label="search project"
@@ -38,6 +38,13 @@
                 ng-if="loggedIn === true">
                 Créer un projet
             </md-button>
+            <md-button 
+                aria-label="Mon compte" 
+                ng-click="myAccount()"
+                ng-if="loggedIn === true">
+                Mon compte
+            </md-button>
+            
             <md-button 
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
@@ -76,6 +83,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <script src="js/app.js"></script>
@@ -83,5 +91,6 @@
     <script src="js/projects.js"></script>
     <script src="js/project.js"></script>
     <script src="js/user.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>

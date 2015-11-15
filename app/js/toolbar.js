@@ -1,20 +1,20 @@
-    var toolbarApp = angular.module('toolbarApp', []);
+var toolbarApp = angular.module('toolbarApp', []);
 
-toolbarApp.config(function ($httpProvider) {
+toolbarApp.config(function ($httpProvider, $cookiesProvider) {
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location) {
+toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location, $cookies) {
     $scope.status = '';
 
-    $rootScope.loggedIn = false;
+    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    $scope.searchText = '';
     $scope.erreur = false;
-    $scope.searchText = undefined;
 
-    $scope.user = {
+    $scope.user = $cookies.get('user') || {
         Login: undefined,
         Password: undefined,
         Email: undefined,
@@ -57,24 +57,37 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             console.log("user : " + $scope.user);
             console.log("user.login : " + $scope.user['Login']);
             $rootScope.loggedIn = true;
+            $cookies.put('loggedIn', $rootScope.loggedIn);
+            $cookies.put('user', $scope.user);
+            console.log("cookie loggedIn : " + $cookies.get('loggedIn'));
+            console.log("cookie user : " + $cookies.get('user'));
             $scope.hide();
         }).error(function (data) {
             $scope.erreur = true;
             console.log("failure message: " + JSON.stringify({data: data}));
         });
     };
-    
+
     $scope.logOut = function () {
-        $rootScope.loggedIn  = false;
+        $rootScope.loggedIn = false;
         $scope.user = undefined;
         console.log($rootScope.loggedIn);
+        $cookies.put('loggedIn', $rootScope.loggedIn);
+        $cookies.put('user', $scope.user);
     };
-    
+
     $scope.search = function () {
-      $location.path('#/');
+        console.log('scope : ' + $scope.searchText);
+        console.log($location.path());
+        $location.path('search-projects/' + $scope.searchText);
+        console.log($location.path());
     };
-    
-    
+
+    $scope.myAccount = function () {
+        $location.path('user/' + $scope.user.Id);
+    };
+
+
     $scope.showAlert = function (ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application

@@ -1,15 +1,24 @@
 var userApp = angular.module('userApp', []);
 
-userApp.controller('UserController', function ($scope, $mdDialog) {
-    $scope.user = {
-        firstName: 'Romain',
-        lastName: 'POUSSIN',
-        login: 'Romain_Poussin',
-        email: 'romain.poussin@ynov.com',
-        image: 'img/romainPoussin.png',
-        description: 'Je suis un freelance depuis deux ans.'
-    };
+userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeParams, $rootScope) {
+    $scope.user = loadUserDetail();
     
+    $rootScope.loggedIn = $cookie.get('loggedIn') | false;
+    
+    $scope.currentProjects = undefined;
+    $scope.completedProjects = undefined;
+
+    function loadUserDetail() {
+        $http.post('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
+            $scope.user = data;
+        }).then(
+                // A finaliser avec Baptiste pour l'api
+                );
+    }
+    ;
+
+
+
     $scope.showDialogContact = function (ev) {
         $mdDialog.show({
             controller: DialogController,

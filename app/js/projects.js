@@ -1,34 +1,21 @@
 var projectsApp = angular.module('projectsApp', []);
 
 
-projectsApp.controller('ProjectsController', function ($scope) {
-    $scope.projects = [
-        {
-            'id': 15,
-            'name': 'premier projet',
-            'leader': 'Jean Jacques',
-            'description': 'JeSGq gggggggggggggggggggggggggggggg gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggfaire',
-            'delay': '3 semaines',
-            'budget': 0,
-            'image': 'img/arton.jpg'
-        },
-        {
-            'id': 15,
-            'name': 'premier projet',
-            'leader': 'Jean Jacques',
-            'description': 'Je sais pas quoi faire',
-            'delay': '3 semaines',
-            'budget': 0,
-            'image': 'img/arton.jpg'
-        },
-        {
-            'id': 15,
-            'name': 'premier projet',
-            'leader': 'Jean Jacques',
-            'description': 'Je sais pas quoi faire',
-            'delay': '3 semaines',
-            'budget': 0,
-            'image': 'img/arton.jpg'
-        }
-    ];
+projectsApp.controller('ProjectsController', function ($scope, $routeParams, $http, $rootScope, $cookies) {
+    $scope.searchText = $routeParams.key;
+    
+    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    
+    $scope.projects = loadProjects();
+    
+    console.log("root : " + $rootScope.loggedIn);
+    function loadProjects() {
+        $http.get('http://codingmarketplace.apphb.com/api/Projects/All').success(function (data) {
+            console.log(data);
+           $scope.projects = data;
+           console.log($scope.projects);
+           console.log("rootScope : " + $rootScope.loggedIn);
+        });
+    }
+    
 });

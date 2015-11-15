@@ -11,6 +11,7 @@
     "angular-route": "1.4.x",
     "angular-resource": "1.4.x",
     "angular-animate": "1.4.x",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "angular-cookies": "latest"
   }
 }
