@@ -1,13 +1,34 @@
 <script type="text/javascript">
-      
-      var onloadCallback = function() {
-      captchaContainer = grecaptcha.render('recaptcha', {
-        'sitekey' : '6Le76BATAAAAAJlBIidxKGSdjWzvhHcnT9KdSYIf',
-        
-      });
-    };
-    </script>
+    $text = "";
 
+    var verifyCallback = function(response) {
+        $text = response;
+    };
+
+    var test = function($http) {
+        var informations = {secret: '6LfeEBETAAAAAI22_20AwjtKh-wBPA6mm-XeeEH2', response: $text};
+        $.ajax({
+            type: "POST",
+            url: 'http://www.google.com/recaptcha/api/siteverify',
+            data: informations,
+            success: function(results) {
+                console.log(results);
+            }
+        });
+        /*$http.post('http://www.google.com/recaptcha/api/siteverify', informations).success(function (data) {
+            console.log("data : " + data);
+        }).error(function (data) {
+            console.log("failure message: " + data);
+        });*/
+    };
+
+    var onloadCallback = function() {
+        grecaptcha.render('g_recaptcha', {
+            'sitekey': '6LfeEBETAAAAAEwwPDwWIrLieii8JGJyHyF06p6j',
+            'callback': verifyCallback
+        });
+    };
+</script>
 <md-dialog aria-label="Inscription"  ng-cloak>
         <md-dialog-content layout-padding layout="column">
             <span layout-gt-sm="row">
@@ -58,16 +79,14 @@
                 </md-input-container>
             </span>
             <span layout-gt-sm="row">
-                <div id="recaptcha" ></div>
+                <div id="g_recaptcha"></div>
             </span>
             <span layout-gt-sm="row">
                 <input type="checkbox" ng-model="agreecondition" aria-label="Agree conditions" ng-required="agreecondition === true">
                 <p>J'accepte les conditions générales d'utilisation *</p>
             </span>
             <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
-            <md-button class="md-primary md-raised">Incription</md-button>
+            <md-button class="md-primary md-raised" onclick="test()">Incription</md-button>
         </md-dialog-content>
 </md-dialog>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-    </script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
