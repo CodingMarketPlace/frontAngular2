@@ -5,21 +5,12 @@
         $text = response;
     };
 
-    var test = function($http) {
-        var informations = {secret: '6LfeEBETAAAAAI22_20AwjtKh-wBPA6mm-XeeEH2', response: $text};
+    var test = function() {
+        console.log($text);
         $.ajax({
-            type: "POST",
-            url: 'http://www.google.com/recaptcha/api/siteverify',
-            data: informations,
-            success: function(results) {
-                console.log(results);
-            }
+            type: 'POST',
+            url: 'http://www.google.com/recaptcha/api/siteverify?secret=6LfeEBETAAAAAI22_20AwjtKh-wBPA6mm-XeeEH2&response=' + $text
         });
-        /*$http.post('http://www.google.com/recaptcha/api/siteverify', informations).success(function (data) {
-            console.log("data : " + data);
-        }).error(function (data) {
-            console.log("failure message: " + data);
-        });*/
     };
 
     var onloadCallback = function() {
