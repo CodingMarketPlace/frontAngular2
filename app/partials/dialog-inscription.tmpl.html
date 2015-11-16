@@ -3,6 +3,13 @@
 
     var verifyCallback = function(response) {
         $text = response;
+        $.ajax({
+            type: "POST",
+            url: "http://codingmarketplace.apphb.com/Api/Users/Register?g_recaptcha_response=" + $text,
+            success: function(results) {
+                console.log(results);
+            }
+        });
     };
 
     var onloadCallback = function() {
@@ -13,7 +20,6 @@
     };
 </script>
 <md-dialog aria-label="Inscription"  ng-cloak>
-    <form id="inscription_form" action="verify.php" method="POST">
         <md-dialog-content layout-padding layout="column">
             <span layout-gt-sm="row">
                 <md-input-container flex-gt-sm="25">
@@ -72,6 +78,5 @@
             <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
             <md-button class="md-primary md-raised">Inscription</md-button>
         </md-dialog-content>
-    </form>
 </md-dialog>
 <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
