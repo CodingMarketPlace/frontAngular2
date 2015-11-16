@@ -5,14 +5,6 @@
         $text = response;
     };
 
-    var test = function() {
-        console.log($text);
-        $.ajax({
-            type: 'POST',
-            url: 'http://www.google.com/recaptcha/api/siteverify?secret=6LfeEBETAAAAAI22_20AwjtKh-wBPA6mm-XeeEH2&response=' + $text
-        });
-    };
-
     var onloadCallback = function() {
         grecaptcha.render('g_recaptcha', {
             'sitekey': '6LfeEBETAAAAAEwwPDwWIrLieii8JGJyHyF06p6j',
@@ -21,6 +13,7 @@
     };
 </script>
 <md-dialog aria-label="Inscription"  ng-cloak>
+    <form id="inscription_form" action="verify.php" method="POST">
         <md-dialog-content layout-padding layout="column">
             <span layout-gt-sm="row">
                 <md-input-container flex-gt-sm="25">
@@ -77,7 +70,8 @@
                 <p>J'accepte les conditions générales d'utilisation *</p>
             </span>
             <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
-            <md-button class="md-primary md-raised" onclick="test()">Incription</md-button>
+            <md-button class="md-primary md-raised">Inscription</md-button>
         </md-dialog-content>
+    </form>
 </md-dialog>
 <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
