@@ -136,6 +136,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 
     $scope.selectChange = function() {
+        console.log($scope.typeaccount);
         if ($scope.typeaccount === 1) {
             $scope.inscriptionProjectCreator = true;
             $scope.inscriptionDevelopper = false;
