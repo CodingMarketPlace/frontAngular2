@@ -2,7 +2,7 @@ var projectsApp = angular.module('projectsApp', []);
 
 
 projectsApp.controller('ProjectsController', function ($scope, $routeParams, $http, $rootScope, $cookies) {
-    $scope.searchText = $routeParams.key;
+    $scope.searchText = $routeParams.key || '';
 
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
