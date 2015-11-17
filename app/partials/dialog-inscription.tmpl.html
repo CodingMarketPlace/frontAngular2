@@ -1,5 +1,6 @@
 <script type="text/javascript">
     $text = "";
+    $captchaValidated = false;
 
     var verifyCallback = function(response) {
         $text = response;
@@ -7,7 +8,9 @@
             type: "POST",
             url: "http://codingmarketplace.apphb.com/Api/Users/Register?g_recaptcha_response=" + $text,
             success: function(results) {
-                console.log(results);
+                if (results === "Well identified") {
+                    $captchaValidated = true;
+                }
             }
         });
     };
@@ -19,8 +22,15 @@
         });
     };
 </script>
-<md-dialog aria-label="Inscription"  ng-cloak>
+<md-dialog aria-label="Inscription" ng-cloak ng-controller="ToolbarCtrl">
         <md-dialog-content layout-padding layout="column">
+            <div ng-if="fieldMissing || verif_password !== password || notAgreed || captchaNotValidated">
+                <p>Erreurs :</p>
+                <p class="error" ng-if="fieldMissing">Au moins l'un des champs requis n'est pas renseigné</p>
+                <p ng-if="verif_password !== password" class="error">Les mots de passe doivent être identiques </p>
+                <p ng-if="notAgreed" class="error">Vous devez accepter les conditions d'utilisation</p>
+                <p ng-if="captchaNotValidated" class="error">Le captcha n'a pas été validé</p>
+            </div>
             <span layout-gt-sm="row">
                 <md-input-container flex-gt-sm="25">
                     <label>Prénom *</label>
@@ -54,15 +64,14 @@
                     <input ng-model="verif_password" placeholder="Vérification du mot de passe" compare-to="password">
                 </md-input-container>
             </span>
-            <p ng-if="verif_password !== password" class="error">Les mots de passe doivent être identiques </p>
             <span layout-gt-sm="row">
                 <md-input-container flex>
                     <label>Type de compte *</label>
-                    <md-select ng-model="typeaccount">
-                        <md-option ng-selected="true">
+                    <md-select ng-model="typeaccount" ng-change="selectChange()">
+                        <md-option value="1" ng-selected="true">
                             Porteur de projet
                         </md-option>
-                        <md-option>
+                        <md-option value="2">
                             Développeur
                         </md-option>
                     </md-select>
@@ -71,12 +80,13 @@
             <span layout-gt-sm="row">
                 <div id="g_recaptcha"></div>
             </span>
+            <br/>
             <span layout-gt-sm="row">
                 <input type="checkbox" ng-model="agreecondition" aria-label="Agree conditions" ng-required="agreecondition === true">
-                <p>J'accepte les conditions générales d'utilisation *</p>
+                <p style="margin-left:10px;">J'accepte les conditions générales d'utilisation *</p>
             </span>
             <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
-            <md-button class="md-primary md-raised">Inscription</md-button>
+            <md-button class="md-primary md-raised" ng-click="checkInscriptionInfos()">Inscription</md-button>
         </md-dialog-content>
 </md-dialog>
 <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>

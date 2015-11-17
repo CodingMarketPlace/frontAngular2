@@ -12,7 +12,13 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 
     $rootScope.loggedIn = $cookies.get('loggedIn') || false;
     $scope.searchText = '';
-    $scope.erreur = false;
+    $scope.erreurLogin = false;
+
+    $scope.notAgreed = false;
+    $scope.captchaNotValidated = false;
+    $scope.fieldMissing = false;
+    $scope.inscriptionProjectCreator = false;
+    $scope.inscriptionDevelopper = false;
 
     $scope.user = $cookies.get('user') || {
         Login: undefined,
@@ -63,7 +69,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             console.log("cookie user : " + $cookies.get('user'));
             $scope.hide();
         }).error(function (data) {
-            $scope.erreur = true;
+            $scope.erreurLogin = true;
             console.log("failure message: " + JSON.stringify({data: data}));
         });
     };
@@ -87,6 +93,58 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('user/' + $scope.user.Id);
     };
 
+    $scope.checkInscriptionInfos = function() {
+        if ($scope.agreecondition !== true){
+            $scope.notAgreed = true;
+        }
+        else {
+            $scope.notAgreed = false;
+        }
+
+        if ($captchaValidated !== true) {
+            $scope.captchaNotValidated = true;
+        }
+        else {
+            $scope.captchaNotValidated = false;
+        }
+
+        if ($scope.firstname === undefined || $scope.lastname === undefined || $scope.login === undefined || $scope.mail === undefined || $scope.password === undefined || $scope.verif_password === undefined) {
+            $scope.fieldMissing = true;
+        }
+        else {
+            $scope.fieldMissing = false;
+        }
+
+        if ($scope.fieldMissing === false && $scope.notAgreed === false && $scope.captchaNotValidated === false && $scope.password === $scope.verif_password) {
+            var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: "", ImageUrl: ""};
+
+            $.ajax({
+            type: "POST",
+            url: "http://codingmarketplace.apphb.com/api/Users/Create",
+            contentType: "application/json",
+            data: JSON.stringify(identification),
+            success: function(results) {
+                $scope.user.password = $scope.password;
+                $scope.user.mail = $scope.login;
+                $scope.connection();
+            },
+            error: function(resultat, status) {
+                console.log(resultat);
+            }
+        });
+        }
+    };
+
+    $scope.selectChange = function() {
+        if ($scope.typeaccount === 1) {
+            $scope.inscriptionProjectCreator = true;
+            $scope.inscriptionDevelopper = false;
+        }
+        else {
+            $scope.inscriptionProjectCreator = false;
+            $scope.inscriptionDevelopper = true;
+        }
+    }
 
     $scope.showAlert = function (ev) {
         // Appending dialog to document.body to cover sidenav in docs app
