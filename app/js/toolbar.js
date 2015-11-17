@@ -9,14 +9,17 @@ toolbarApp.config(function ($httpProvider) {
 
 toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location, $cookies) {
     $scope.status = '';
-
+    
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
     console.log($rootScope.loggedIn);
 
-    $rootScope.searchText = '';
-    console.log($rootScope.searchText);
+
     $scope.erreurLogin = false;
+    
+    $scope.input = {
+      searchText: ''  
+    };
 
     $scope.notAgreed = false;
     $scope.captchaNotValidated = false;
@@ -81,9 +84,9 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 
     $scope.search = function () {
-        console.log('scope : ' + $rootScope.searchText);
+        console.log('scope : ' + $scope.input.searchText);
         console.log($location.path());
-        $location.path('search-projects/' + $rootScope.searchText);
+        $location.path('search-projects/' + $scope.input.searchText);
         console.log($location.path());
     };
 
@@ -91,25 +94,22 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('user/' + $rootScope.user['UniqId']);
     };
 
-    $scope.checkInscriptionInfos = function() {
-        if ($scope.agreecondition !== true){
+    $scope.checkInscriptionInfos = function () {
+        if ($scope.agreecondition !== true) {
             $scope.notAgreed = true;
-        }
-        else {
+        } else {
             $scope.notAgreed = false;
         }
 
         if ($captchaValidated !== true) {
             $scope.captchaNotValidated = true;
-        }
-        else {
+        } else {
             $scope.captchaNotValidated = false;
         }
 
         if ($scope.firstname === undefined || $scope.lastname === undefined || $scope.login === undefined || $scope.mail === undefined || $scope.password === undefined || $scope.verif_password === undefined) {
             $scope.fieldMissing = true;
-        }
-        else {
+        } else {
             $scope.fieldMissing = false;
         }
 
@@ -117,29 +117,28 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: "", ImageUrl: ""};
 
             $.ajax({
-            type: "POST",
-            url: "http://codingmarketplace.apphb.com/api/Users/Create",
-            contentType: "application/json",
-            data: JSON.stringify(identification),
-            success: function(results) {
-                $scope.user.password = $scope.password;
-                $scope.user.mail = $scope.login;
-                $scope.connection();
-            },
-            error: function(resultat, status) {
-                console.log(resultat);
-            }
-        });
+                type: "POST",
+                url: "http://codingmarketplace.apphb.com/api/Users/Create",
+                contentType: "application/json",
+                data: JSON.stringify(identification),
+                success: function (results) {
+                    $scope.user.password = $scope.password;
+                    $scope.user.mail = $scope.login;
+                    $scope.connection();
+                },
+                error: function (resultat, status) {
+                    console.log(resultat);
+                }
+            });
         }
     };
 
-    $scope.selectChange = function() {
+    $scope.selectChange = function () {
         if ($scope.typeaccount === '1') {
             console.log("1");
             $scope.inscriptionProjectCreator = true;
             $scope.inscriptionDevelopper = false;
-        }
-        else if ($scope.typeaccount === '2'){
+        } else if ($scope.typeaccount === '2') {
             console.log("2");
             $scope.inscriptionProjectCreator = false;
             $scope.inscriptionDevelopper = true;

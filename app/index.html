@@ -21,9 +21,8 @@
             <span flex></span>
             <md-input-container style="margin-bottom: 0px;" 
                                 ng-if="loggedIn === true">
-                <input ng-model="searchText"
-                       placeholder="Rechercher un projet"
-                       ng-if="loggedIn === true">
+                <input ng-model="input.searchText"
+                       placeholder="Rechercher un projet">
             </md-input-container>
             <md-icon md-svg-src="img/icons/search.svg" 
                      aria-label="search project"
