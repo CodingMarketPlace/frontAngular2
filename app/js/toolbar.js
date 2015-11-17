@@ -1,6 +1,6 @@
 var toolbarApp = angular.module('toolbarApp', []);
 
-toolbarApp.config(function ($httpProvider, $cookiesProvider) {
+toolbarApp.config(function ($httpProvider) {
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working
@@ -14,7 +14,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $rootScope.loggedIn = ($test === "true");
     console.log($rootScope.loggedIn);
 
-    $scope.searchText = '';
+    $rootScope.searchText = '';
+    console.log($rootScope.searchText);
     $scope.erreurLogin = false;
 
     $scope.notAgreed = false;
@@ -34,8 +35,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         Description: undefined,
         UniqId: undefined,
         ImageUrl: undefined,
-        ProjectCreator: undefined,
-        UniqId: undefined
+        ProjectCreator: undefined
     };
 
 
@@ -81,9 +81,9 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 
     $scope.search = function () {
-        console.log('scope : ' + $scope.searchText);
+        console.log('scope : ' + $rootScope.searchText);
         console.log($location.path());
-        $location.path('search-projects/' + $scope.searchText);
+        $location.path('search-projects/' + $rootScope.searchText);
         console.log($location.path());
     };
 
@@ -146,7 +146,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         }
         console.log($scope.inscriptionDevelopper);
         console.log($scope.inscriptionProjectCreator);
-    }
+    };
 
     $scope.showAlert = function (ev) {
         // Appending dialog to document.body to cover sidenav in docs app

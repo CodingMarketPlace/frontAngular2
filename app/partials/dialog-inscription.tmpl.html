@@ -64,7 +64,7 @@
                     <input ng-model="verif_password" placeholder="Vérification du mot de passe" compare-to="password">
                 </md-input-container>
             </span>
-            <span layout-gt-sm="row">
+            <span layout-gt-sm="row" layout-wrap>
                 <md-input-container flex>
                     <label>Type de compte *</label>
                     <md-select ng-model="typeaccount" ng-change="selectChange()">
@@ -75,6 +75,12 @@
                             Développeur
                         </md-option>
                     </md-select>
+                </md-input-container>
+            </span>
+            <span layout-gt-sm="row" layout-wrap>
+                <md-input-container flex>
+                    <label>Description</label>
+                    <textarea ng-model="description" placeholder="Description"></textarea>
                 </md-input-container>
             </span>
             <span layout-gt-sm="row">
