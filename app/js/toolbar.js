@@ -20,8 +20,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.notAgreed = false;
     $scope.captchaNotValidated = false;
     $scope.fieldMissing = false;
-    $scope.inscriptionProjectCreator = false;
-    $scope.inscriptionDevelopper = false;
 
     $scope.user = $cookies.get('user') || {
         Login: undefined,
@@ -136,15 +134,18 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 
     $scope.selectChange = function() {
-        console.log($scope.typeaccount);
-        if ($scope.typeaccount === 1) {
+        if ($scope.typeaccount === '1') {
+            console.log("1");
             $scope.inscriptionProjectCreator = true;
             $scope.inscriptionDevelopper = false;
         }
-        else {
+        else if ($scope.typeaccount === '2'){
+            console.log("2");
             $scope.inscriptionProjectCreator = false;
             $scope.inscriptionDevelopper = true;
         }
+        console.log($scope.inscriptionDevelopper);
+        console.log($scope.inscriptionProjectCreator);
     }
 
     $scope.showAlert = function (ev) {
