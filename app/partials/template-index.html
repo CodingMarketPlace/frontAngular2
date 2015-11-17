@@ -22,7 +22,8 @@
                     <h2>Découvrez un réseau unique de professionnels et réussissez tous vos projets.</h2>
                     <md-button class="md-raised" 
                                aria-label="Inscription" 
-                               ng-click="showDialogInscription($event)">
+                               ng-click="showDialogInscription($event)"
+                               ng-if="loggedIn !== true">
                         Inscrivez-vous
                     </md-button>
                 </div>
@@ -67,7 +68,8 @@
      ng-controller="ToolbarCtrl">
     <h2 style="color: white;text-align: center;">Venez proposer votre projet.</h2>
     <md-button class="md-raised md-primary" 
-               ng-click="showDialogInscription($event)">
+               ng-click="showDialogInscription($event)"
+               ng-if="loggedIn !== true">
         Inscrivez-vous
     </md-button>
 </div>

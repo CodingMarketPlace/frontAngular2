@@ -10,7 +10,10 @@ toolbarApp.config(function ($httpProvider, $cookiesProvider) {
 toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location, $cookies) {
     $scope.status = '';
 
-    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    $test = $cookies.get('loggedIn');
+    $rootScope.loggedIn = ($test === "true");
+    console.log($rootScope.loggedIn);
+
     $scope.searchText = '';
     $scope.erreurLogin = false;
 
@@ -31,7 +34,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         Activated: undefined,
         Admin: undefined,
         Description: undefined,
-        Id: undefined,
+        UniqId: undefined,
         ImageUrl: undefined,
         ProjectCreator: undefined,
         UniqId: undefined
@@ -59,14 +62,10 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         var identification = {password: $scope.user.password, login: $scope.user.mail};
         $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
             $scope.user = data;
-            console.log("data : " + data);
-            console.log("user : " + $scope.user);
-            console.log("user.login : " + $scope.user['Login']);
+            $rootScope.user = $scope.user;
             $rootScope.loggedIn = true;
             $cookies.put('loggedIn', $rootScope.loggedIn);
             $cookies.put('user', $scope.user);
-            console.log("cookie loggedIn : " + $cookies.get('loggedIn'));
-            console.log("cookie user : " + $cookies.get('user'));
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;
@@ -80,6 +79,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         console.log($rootScope.loggedIn);
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
+        $location.path('#/');
     };
 
     $scope.search = function () {
@@ -90,7 +90,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 
     $scope.myAccount = function () {
-        $location.path('user/' + $scope.user.Id);
+        $location.path('user/' + $rootScope.user['UniqId']);
     };
 
     $scope.checkInscriptionInfos = function() {

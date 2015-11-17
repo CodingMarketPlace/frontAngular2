@@ -1,10 +1,8 @@
-
-
 <div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="UserController">
     <h2>Détails du compte</h2>
     <div layout-gt-sm="column">
         <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
-            <img class="roundedMediumImage" src="{{user.ImageUrl}}" flex-gt="50" flex-sm="100">
+            <img class="roundedMediumImage" src="http://www.journaldugeek.com/files/2014/04/infographie_profil_internautes_europ%C3%A9ens-600x375.jpg" flex-gt="50" flex-sm="100">
             <div layout="column" layout-wrap>
                 <h3>{{user.FirstName}} {{user.LastName}} <span>({{user.Login}})</span></h3>
                 <h4 flex>{{user.Email}}</h4>
@@ -14,7 +12,7 @@
                 </span>
                 <md-button class="md-raised md-primary" ng-click="showDialogContact($event)">Contacter {{user.FirstName}}</md-button>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 
@@ -41,8 +39,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="ProjectController">
     <h2>Projets terminés</h2>
@@ -83,4 +79,3 @@
         </div>
     </div>
 </div>
-

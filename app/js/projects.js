@@ -4,7 +4,9 @@ var projectsApp = angular.module('projectsApp', []);
 projectsApp.controller('ProjectsController', function ($scope, $routeParams, $http, $rootScope, $cookies) {
     $scope.searchText = $routeParams.key;
     
-    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    $test = $cookies.get('loggedIn');
+    $rootScope.loggedIn = ($test === "true");
+    console.log($rootScope.loggedIn);
     
     $scope.projects = loadProjects();
     

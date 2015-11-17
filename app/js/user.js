@@ -1,23 +1,14 @@
 var userApp = angular.module('userApp', []);
 
-userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeParams, $rootScope) {
-    $scope.user = loadUserDetail();
+userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeParams, $rootScope, $cookies) {
     
-    $rootScope.loggedIn = $cookie.get('loggedIn') | false;
-    
-    $scope.currentProjects = undefined;
-    $scope.completedProjects = undefined;
-
-    function loadUserDetail() {
-        $http.post('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
+    $scope.loadUserDetail = function() {
+        $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
             $scope.user = data;
         }).then(
                 // A finaliser avec Baptiste pour l'api
                 );
-    }
-    ;
-
-
+    };
 
     $scope.showDialogContact = function (ev) {
         $mdDialog.show({
@@ -33,6 +24,16 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
                     $scope.status = 'You cancelled the dialog.';
                 });
     };
+    
+    $scope.loadUserDetail();
+
+    $test = $cookies.get('loggedIn');
+    $rootScope.loggedIn = ($test === "true");
+    console.log($rootScope.loggedIn);
+
+    $scope.currentProjects = undefined;
+    $scope.completedProjects = undefined;
+
 });
 
 //Controller pour l'ouverture des différentes pop-up

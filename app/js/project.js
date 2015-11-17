@@ -3,7 +3,9 @@ var projectApp = angular.module('projectApp', []);
 projectApp.controller('ProjectController', function ($scope, $http, $routeParams, $rootScope, $cookies) {
     $scope.IdProject = $routeParams.projectId;
     
-    $rootScope.loggedIn = $cookies.get('loggedIn') || false;
+    $test = $cookies.get('loggedIn');
+    $rootScope.loggedIn = ($test === "true");
+    console.log($rootScope.loggedIn);
     
     $scope.projet = loadProjectDetail ();
     
