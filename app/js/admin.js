@@ -11,7 +11,14 @@ adminApp.controller('AdminController', function ($scope, $location, $routeParams
             $scope.users = data;
             console.log($scope.users);
         });
+        if ($rootScope.loggedIn === false) {
+        	$location.path('#/');
+        }
     };
+
+    $test = $cookies.get('loggedIn');
+    $rootScope.loggedIn = ($test === "true");
+    console.log($rootScope.loggedIn);
 
     $scope.loadUsersData();
 
