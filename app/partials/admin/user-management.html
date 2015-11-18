@@ -1,0 +1,20 @@
+<div id="template-users-management" layout-padding ng-controller="AdminController">
+	<h1>Gestion des utilisateurs</h1>
+	<span layout="row"
+          layout-wrap 
+          layout-margin
+          layout-padding 
+          layout-align="space-around left">
+        <md-card-content class="md-whiteframe-z1" 
+                         ng-repeat="user in users"
+                         layout-margin
+                         layout-padding
+                         flex-gt-sm="40" 
+                         style="background-color: #F8F8FF; word-break: break-all;">
+            <p>{{user.FirstName}} {{user.LastName}}</p>
+            <p>{{user.Login}}</p>
+            <p>{{user.Email}}</p>
+            <md-button class="md-primary md-raised" ng-click="deleteUser(user.UniqId)">Delete User</md-button>
+        </md-card-content>
+    </span>
+</div>
