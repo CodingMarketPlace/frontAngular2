@@ -5,6 +5,8 @@ projectsApp.controller('ProjectsController', function ($scope, $routeParams, $ht
     $scope.searchText = $routeParams.key || '';
 
     $test = $cookies.get('loggedIn');
+    $scope.countProjects = 0;
+    $scope.user = {};
     $rootScope.loggedIn = ($test === "true");
     console.log($rootScope.loggedIn);
 
@@ -15,9 +17,14 @@ projectsApp.controller('ProjectsController', function ($scope, $routeParams, $ht
         $http.get('http://codingmarketplace.apphb.com/api/Projects/All/' + $scope.searchText).success(function (data) {
             console.log(data);
             $scope.projects = data;
+            $scope.countProjects = $scope.projects.length || $scope.countProjects;
             console.log($scope.projects);
             console.log("rootScope : " + $rootScope.loggedIn);
+            angular.forEach($scope.projects, function (projet) {
+                $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + projet.IdUser).success(function (data) {
+                   projet.userName = data.FirstName + ' ' + data.LastName;
+                });
+            });
         });
     }
-
 });

@@ -2,24 +2,24 @@
     <md-dialog-content layout-padding layout="column" layout-wrap>
         <md-input-container flex>
             <label>Nom du projet *</label>
-            <input ng-model='projectName' placeholder="Nom du projet" required>
+            <input ng-model='project.projectName' placeholder="Nom du projet" required>
         </md-input-container>
         <md-input-container flex-gt="50">
             <label>Budget du projet *</label>
-            <input type="number" ng-model='projectBudget' placeholder="Budget du projet" required>
+            <input type="number" ng-model='project.projectBudget' placeholder="Budget du projet" required>
         </md-input-container>
         <md-input-container flex-gt='50' flex-sm='100'>
             <label>Durée du projet (en jours) *</label>
-            <input type="number" ng-model='projectDelay' placeholder="Durée du projet (en jours)" required>
+            <input type="number" ng-model='project.projectDelay' placeholder="Durée du projet (en jours)" required>
         </md-input-container>
 
         <!--Image du projet-->
 
         <md-input-container flex>
             <label>Description du projet</label>
-            <textarea id="editeur" name="editeur" class="ckeditor" aria-label="Description du projet"></textarea>
+            <textarea id="editeur" ng-model="project.description" name="editeur" class="ckeditor" aria-label="Description du projet"></textarea>
         </md-input-container>
         <span style="color: gray;">Tous les champs portant une * sont obligatoires.</span>
-        <md-button class="md-primary md-raised">Création du projet</md-button>
+        <md-button class="md-primary md-raised" ng-click="createProject()">Création du projet</md-button>
     </md-dialog-content>
 </md-dialog>

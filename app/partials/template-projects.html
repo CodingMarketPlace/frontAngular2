@@ -2,8 +2,8 @@
 <div id="template-projects" 
      layout-padding>
     <h1>Les projets actuellement disponibles</h1>
-    <h2>Nous avons actuellement {{projects.length}} projets correspondant à votre recherche</h2>
-    <a href='projects'>Voir tous les projets</a>
+    <h2>Nous avons actuellement {{countProjects}} projets correspondant à votre recherche</h2>
+    <a href='#/search-projects/'>Voir tous les projets</a>
     <span layout="row" 
           layout-wrap 
           layout-margin
@@ -16,11 +16,11 @@
                          flex-gt-sm="40" 
                          style="background-color: #F8F8FF; word-break: break-all;">
             <img src="{{projet.ImageUrl}}" alt="Image du projet" style="width: 200px; height: 200px;"/>
-            <p>{{projet.Title}}</p>
-            <p>Par {{projet.IdUser}} 
+            <h3>{{projet.Title}}</h3>
+            <h4>Par {{projet.userName}} 
             <md-icon md-svg-src="img/icons/calendar.svg"></md-icon> {{projet.Duration}} / {{projet.Budget}} 
             <md-icon md-svg-src="img/icons/money.svg"></md-icon>
-            </p>
+            </h4>
             <p>{{projet.Description}}</p>
             <a ng-href="#/projects/{{projet.Id}}" 
                layout-align="bottom left">

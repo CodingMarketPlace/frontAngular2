@@ -1,4 +1,4 @@
-var toolbarApp = angular.module('toolbarApp', []);
+var toolbarApp = angular.module('toolbarApp', ['ngMaterial']);
 
 toolbarApp.config(function ($httpProvider) {
     //Enable cross domain calls
@@ -13,7 +13,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
     console.log($rootScope.loggedIn);
-
+    
 
     $scope.erreurLogin = false;
     
@@ -21,9 +21,17 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
       searchText: ''  
     };
 
+    $scope.project = {
+        projectName: '',
+        projectBudget: 0,
+        projectDelay: 0,
+        description: ''
+    };
+
     $scope.notAgreed = false;
     $scope.captchaNotValidated = false;
     $scope.fieldMissing = false;
+    $scope.description = '';
 
     $scope.user = $cookies.get('user') || {
         Login: undefined,
@@ -94,6 +102,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('user/' + $rootScope.user['UniqId']);
     };
 
+    $scope.createProject = function () {
+        var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: new Date()};
+        
+        $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/', project);
+    };
+
     $scope.checkInscriptionInfos = function () {
         if ($scope.agreecondition !== true) {
             $scope.notAgreed = true;
@@ -114,7 +128,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         }
 
         if ($scope.fieldMissing === false && $scope.notAgreed === false && $scope.captchaNotValidated === false && $scope.password === $scope.verif_password) {
-            var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: "", ImageUrl: ""};
+            var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: $scope.description, ImageUrl: ""};
 
             $.ajax({
                 type: "POST",
