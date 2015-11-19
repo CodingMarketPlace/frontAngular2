@@ -35,6 +35,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.showMobileMainHeader = true;
     $scope.screenIsSmall = $mdMedia('sm');
 
+    $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+
+    $scope.goAdmin = function() {
+        $location.path('admin');
+    }
+
     $scope.user = {
         Login: $cookies.get('user_login') || undefined,
         Password: undefined,

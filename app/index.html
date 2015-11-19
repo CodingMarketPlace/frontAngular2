@@ -31,6 +31,12 @@
             </md-icon>
             <span flex></span>
             <md-button 
+                aria-label="Gestion Admin" 
+                ng-click="goAdmin()"
+                ng-if="loggedIn === true && !screenIsSmall && isAdmin">
+                Gestion Admin
+            </md-button>
+            <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
                 ng-if="loggedIn === true && !screenIsSmall">
@@ -42,7 +48,6 @@
                 ng-if="loggedIn === true && !screenIsSmall">
                 Mon compte
             </md-button>
-            
             <md-button 
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
@@ -79,6 +84,13 @@
             </md-icon>
             </span>
             <span flex></span>
+            <md-button 
+                style="width:100%;"
+                aria-label="Gestion Admin" 
+                ng-click="goAdmin()"
+                ng-if="loggedIn === true && isAdmin">
+                Gestion Admin
+            </md-button>
             <md-button 
                 style="width:100%;"
                 aria-label="Créer un projet" 
