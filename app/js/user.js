@@ -21,19 +21,34 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
       }); 
     };
 
+    $scope.user = {
+        Login: $cookies.get('user_login') || undefined,
+        Password: undefined,
+        Email: undefined,
+        FirstName: undefined,
+        LastName: undefined,
+        verif_password: undefined,
+        Developper: $cookies.get('user_Developper') === "true" ? true : false || undefined,
+        Activated: undefined,
+        Admin: $cookies.get('user_Admin') === "true" ? true : false || undefined,
+        Description: undefined,
+        UniqId: $cookies.get('user_UniqId'),
+        ImageUrl: undefined,
+        ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
+    };
+    console.log($scope.user);
+
     $scope.isDisabled = ($scope.IdUserConnected === $routeParams.userId) ? false : true;
-    console.log('disabled' + $scope.isDisabled);
     $scope.loadUserDetail = function () {
+<<<<<<< HEAD
         $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $scope.user.IdSeeingProfil).success(function (data) {
             console.log("test                        : " + $scope.myAccount);
+=======
+        $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
+>>>>>>> 72f7b8811abf319bca5b779ee20172e6903381b5
             $scope.user = data;
-            console.log('user detail : ' + $scope.user.UniqId);
-            console.log('coucou: ' + ($scope.IdUserConnected === $routeParams.userId));
-            console.log('conn : ' + $scope.IdUserConnected + '     compte : ' + $routeParams.userId);
-            console.log('user description : ' + $scope.user.Description);
             if ($scope.IdUserConnected === $routeParams.userId)
             {
-                console.log("test                        : " + $scope.myAccount);
                 $scope.myAccount = true;
             }
         });
@@ -82,7 +97,6 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
     $scope.loadUserDetail();
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
-    console.log($rootScope.loggedIn);
     $scope.currentProjects = undefined;
     $scope.completedProjects = undefined;
 });

@@ -33,7 +33,7 @@
                      layout-wrap 
                      flex 
                      style="margin-top: 80px;" 
-                     ng-if="screenSmall">
+                     ng-if="screenSmall && myAccount === true">
                     <div ng-if="verif_password !== password">
                         <p class="error">Erreurs : Les mots de passe doivent être identiques</p>
                     </div>
@@ -62,7 +62,7 @@
                  layout-wrap 
                  flex 
                  style="margin-top: 80px;" 
-                 ng-if="!screenSmall">
+                 ng-if="!screenSmall && myAccount === true">
                 <md-input-container flex="50">
                     <label>Mot de passe *</label>
                     <md-icon md-svg-src="img/icons/password.svg" 
