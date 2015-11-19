@@ -242,10 +242,10 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                 });
     };
 
-    $scope.openSideNavPanel = function() {
+    $rootScope.openSideNavPanel = function() {
         $mdSidenav('left').open();
     };
-    $scope.closeSideNavPanel = function() {
+    $rootScope.closeSideNavPanel = function() {
         $mdSidenav('left').close();
     };
 });
