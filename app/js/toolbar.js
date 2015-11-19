@@ -7,7 +7,7 @@ toolbarApp.config(function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
-toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location, $cookies) {
+toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $http, $location, $cookies, $mdSidenav, $mdMedia) {
     $scope.status = '';
     
     $test = $cookies.get('loggedIn');
@@ -32,6 +32,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.captchaNotValidated = false;
     $scope.fieldMissing = false;
     $scope.description = '';
+    $scope.showMobileMainHeader = true;
+    $scope.screenIsSmall = $mdMedia('sm');
 
     $scope.user = $cookies.get('user') || {
         Login: undefined,
@@ -223,6 +225,13 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
+    };
+
+    $scope.openSideNavPanel = function() {
+        $mdSidenav('left').open();
+    };
+    $scope.closeSideNavPanel = function() {
+        $mdSidenav('left').close();
     };
 });
 
