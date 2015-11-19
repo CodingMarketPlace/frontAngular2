@@ -40,12 +40,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
 
     $scope.isDisabled = ($scope.IdUserConnected === $routeParams.userId) ? false : true;
     $scope.loadUserDetail = function () {
-<<<<<<< HEAD
-        $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $scope.user.IdSeeingProfil).success(function (data) {
-            console.log("test                        : " + $scope.myAccount);
-=======
         $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
->>>>>>> 72f7b8811abf319bca5b779ee20172e6903381b5
             $scope.user = data;
             if ($scope.IdUserConnected === $routeParams.userId)
             {
