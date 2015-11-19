@@ -35,20 +35,20 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.showMobileMainHeader = true;
     $scope.screenIsSmall = $mdMedia('sm');
 
-    $scope.user = $cookies.get('user') || {
-        Login: undefined,
+    $scope.user = {
+        Login: $cookies.get('user_login') || undefined,
         Password: undefined,
         Email: undefined,
         FirstName: undefined,
         LastName: undefined,
         verif_password: undefined,
-        Developper: undefined,
+        Developper: $cookies.get('user_Developper') === "true" ? true : false || undefined,
         Activated: undefined,
-        Admin: undefined,
+        Admin: $cookies.get('user_Admin') === "true" ? true : false || undefined,
         Description: undefined,
-        UniqId: undefined,
+        UniqId: $cookies.get('user_UniqId') === "true" ? true : false || undefined,
         ImageUrl: undefined,
-        ProjectCreator: undefined
+        ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
     };
 
 
@@ -69,6 +69,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 ////Fonctions publiques//////
 /////////////////////////////
 
+    // Connexion d'un user
     $scope.connection = function () {
         var identification = {password: $scope.user.password, login: $scope.user.mail};
         $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
@@ -76,7 +77,14 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $rootScope.user = $scope.user;
             $rootScope.loggedIn = true;
             $cookies.put('loggedIn', $rootScope.loggedIn);
-            $cookies.put('user', $scope.user);
+            $cookies.put('user_login', $scope.user.Login);
+            $cookies.put('user_UniqId', $scope.user.UniqId);
+            var projectCreatorStr = $scope.user.ProjectCreator === true ? "true" : "false";
+            var Admin = $scope.user.Admin === true ? "true" : "false";
+            var Developper = $scope.user.Developper === true ? "true" : "false";
+            $cookies.put('user_ProjectCreator', projectCreatorStr);
+            $cookies.put('user_Admin', Admin);
+            $cookies.put('user_Developper', Developper);
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;
@@ -84,6 +92,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         });
     };
 
+    // Déconnexion d'un user
     $scope.logOut = function () {
         $rootScope.loggedIn = false;
         $scope.user = undefined;
@@ -93,6 +102,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('#/');
     };
 
+    // Recherche d'un project
     $scope.search = function () {
         console.log('scope : ' + $scope.input.searchText);
         console.log($location.path());
@@ -100,16 +110,19 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         console.log($location.path());
     };
 
+    // Accès à mon compte
     $scope.myAccount = function () {
         $location.path('user/' + $rootScope.user['UniqId']);
     };
 
+    // Création d'un project
     $scope.createProject = function () {
-        var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: new Date()};
+        var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: ''};
         
         $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/', project);
     };
 
+    // Validation des informations d'inscription
     $scope.checkInscriptionInfos = function () {
         if ($scope.agreecondition !== true) {
             $scope.notAgreed = true;
@@ -149,6 +162,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         }
     };
 
+    // Affectation de valeurs suivant le rôle sélectionné
     $scope.selectChange = function () {
         if ($scope.typeaccount === '1') {
             console.log("1");
@@ -163,6 +177,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         console.log($scope.inscriptionProjectCreator);
     };
 
+    // Affichage d'un alert ou pop-up
     $scope.showAlert = function (ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -179,7 +194,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                 );
     };
 
-    //pop-up de connexion 
+    // Affichage pop-up de connexion 
     $scope.showDialogConnect = function (ev) {
         $mdDialog.show({
             controller: DialogController,
@@ -195,7 +210,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                 });
     };
 
-    //pop-up d'inscription
+    // Affichage  pop-up d'inscription
     $scope.showDialogInscription = function (ev) {
         $mdDialog.show({
             controller: DialogController,
@@ -211,7 +226,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                 });
     };
 
-    //pop-up de création de projet 
+    // Affichage pop-up de création de projet 
     $scope.showDialogProjectCreate = function (ev) {
         $mdDialog.show({
             controller: DialogController,
@@ -235,7 +250,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     };
 });
 
-//Controller pour l'ouverture des différentes pop-up
+// Controller pour l'ouverture des différentes pop-up
 function DialogController($scope, $mdDialog) {
     $scope.hide = function () {
         $mdDialog.hide();
