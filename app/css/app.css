@@ -128,7 +128,9 @@ footer {
 }
 
 md-toolbar > div > md-input-container > label,
-md-toolbar > div > md-input-container > input
+md-toolbar > div > md-input-container > input,
+md-sidenav > span > md-input-container > label,
+md-sidenav > span > md-input-container > input
 {
     color: #fff !important;
 }
@@ -201,4 +203,10 @@ md-content {
 .descProject p.descLeader {
     font-weight: bold;
     color: #828282;
+}
+
+#sidenav {
+    background: rgb(63,81,181);
+    color:#fff;
+    text-align: center;
 }

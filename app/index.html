@@ -7,36 +7,87 @@
         <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
         <link rel="stylesheet" href="css/app.css"/>
     </head>
-    <body id="allProjects">
-    <md-toolbar id="toolbar"
-                ng-controller="ToolbarCtrl">
+    <body id="allProjects" md-swipe-right="openSideNavPanel()" md-swipe-left="closeSideNavPanel()">
+    <div ng-controller="ToolbarCtrl">
+    <md-toolbar id="toolbar">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" 
-                       aria-label="Menu">
-                <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+                       aria-label="Side Panel" ng-click="openSideNavPanel()" ng-if="screenIsSmall">
+            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
             </md-button>
             <h2>
                 <span><a href="#/">Coding Market Place</a></span>
             </h2>
             <span flex></span>
             <md-input-container style="margin-bottom: 0px;" 
-                                ng-if="loggedIn === true">
+                                ng-if="loggedIn === true && !screenIsSmall">
                 <input ng-model="input.searchText"
                        placeholder="Rechercher un projet">
             </md-input-container>
             <md-icon md-svg-src="img/icons/search.svg" 
                      aria-label="search project"
                      ng-click="search()"
-                     ng-if="loggedIn === true">
+                     ng-if="loggedIn === true && !screenIsSmall">
             </md-icon>
             <span flex></span>
             <md-button 
+                aria-label="Créer un projet" 
+                ng-click="showDialogProjectCreate($event)"
+                ng-if="loggedIn === true && !screenIsSmall">
+                Créer un projet
+            </md-button>
+            <md-button 
+                aria-label="Mon compte" 
+                ng-click="myAccount()"
+                ng-if="loggedIn === true && !screenIsSmall">
+                Mon compte
+            </md-button>
+            
+            <md-button 
+                aria-label="Connexion" 
+                ng-click="showDialogConnect($event)" 
+                ng-if="loggedIn !== true && !screenIsSmall">
+                Connexion
+            </md-button>
+            <md-button 
+                aria-label="Inscription"
+                ng-click="showDialogInscription($event)"
+                ng-if="loggedIn !== true && !screenIsSmall">
+                Inscription
+            </md-button>
+            <md-button
+                aria-label="Déconnexion"
+                ng-click="logOut()"
+                ng-if="loggedIn === true && !screenIsSmall">
+                Déconnexion
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-sidenav ng-if="screenIsSmall" id="sidenav" class="md-sidenav-left md-whiteframe-z2"
+        md-component-id="left" layout-wrap>
+            <span layout="row" layout-padding layout-margin>
+            <md-input-container style="margin-bottom: 0px;" 
+                                ng-if="loggedIn === true" flex>
+                <input ng-model="input.searchText"
+                       placeholder="Rechercher un projet" flex>
+            </md-input-container>
+            <md-icon md-svg-src="img/icons/search.svg"
+                     style="color:#fff" 
+                     aria-label="search project"
+                     ng-click="search()"
+                     ng-if="loggedIn === true">
+            </md-icon>
+            </span>
+            <span flex></span>
+            <md-button 
+                style="width:100%;"
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
                 ng-if="loggedIn === true">
                 Créer un projet
             </md-button>
             <md-button 
+                style="width:100%;"
                 aria-label="Mon compte" 
                 ng-click="myAccount()"
                 ng-if="loggedIn === true">
@@ -44,25 +95,28 @@
             </md-button>
             
             <md-button 
+                style="width:100%;"
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
                 ng-if="loggedIn !== true">
                 Connexion
             </md-button>
             <md-button 
+                style="width:100%;"
                 aria-label="Inscription"
                 ng-click="showDialogInscription($event)"
                 ng-if="loggedIn !== true">
                 Inscription
             </md-button>
             <md-button
+                style="width:100%;"
                 aria-label="Déconnexion"
                 ng-click="logOut()"
                 ng-if="loggedIn === true">
                 Déconnexion
             </md-button>
-        </div>
-    </md-toolbar>
+    </md-sidenav>
+</div>
     <md-content class="view-container" ng-view>
     </md-content>
 
