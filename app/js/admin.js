@@ -1,7 +1,9 @@
 var adminApp = angular.module('adminApp', []);
 
-adminApp.controller('AdminController', function ($scope, $location, $routeParams, $http, $rootScope, $cookies, $route) {
+adminApp.controller('AdminController', function ($scope, $mdDialog, $location, $routeParams, $http, $rootScope, $cookies, $route) {
     
+    $scope.selectedUser = {};
+
     $scope.UserManagement = function () {
       $location.path('/admin/user-management');
     };
@@ -41,6 +43,34 @@ adminApp.controller('AdminController', function ($scope, $location, $routeParams
             console.log(error);
         });
     };
-    
+   
+     $scope.updateUser = function (id, admin, projetCreator, Dev) {
+
+        var updateUser = {ID: 0, Admin: admin, ProjectCreator : projetCreator, Developper: Dev, UniqId: id};
+        $http.post('http://codingmarketplace.apphb.com/api/users/ChangeRole/'+$scope.adminId, updateUser).success(function (data) {
+             
+             alert(data);
+        })
+        .error(function (data) {
+            
+            alert("Une errreur est survenue !");
+        });
+        
+    };
+
 });
+
+
+//Controller pour l'ouverture des différentes pop-up
+function DialogController($scope, $mdDialog) {
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+    };
+}
 

@@ -11,10 +11,29 @@
                          layout-padding
                          flex-gt-sm="40" 
                          style="background-color: #F8F8FF; word-break: break-all;">
-            <p>{{user.FirstName}} {{user.LastName}}</p>
-            <p>{{user.Login}}</p>
-            <p>{{user.Email}}</p>
-            <md-button class="md-primary md-raised" ng-click="deleteUser(user.UniqId)">Delete User</md-button>
+            <md-list ng-controller="AdminController" ng-cloak>
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ user.FirstName }} {{user.LastName}}</h3>
+                <h4>{{ user.Login }}</h4>
+                <p>{{ user.Email }}</p>
+              </div>
+              <md-subheader class="md-no-sticky">Type de Compte</md-subheader>
+              <md-list-item >
+                <p> Administrateur </p>
+                <md-checkbox class="md-secondary" ng-model="user.Admin"></md-checkbox>
+              </md-list-item>
+              <md-list-item >
+                <p> Porteur de projet </p>
+                <md-checkbox class="md-secondary" ng-model="user.ProjectCreator"></md-checkbox>
+              </md-list-item>
+              <md-list-item >
+                <p> Developpeur </p>
+                <md-checkbox class="md-secondary" ng-model="user.Developper"></md-checkbox>
+              </md-list-item>
+            </md-list>
+            
+            <md-button class="md-primary md-raised" ng-click="updateUser(user.UniqId, user.Admin, user.ProjectCreator, user.Developper)">Update User</md-button>
+            <md-button class="md-warn md-raised" ng-click="deleteUser(user.UniqId)">Delete User</md-button>
         </md-card-content>
     </span>
 </div>
