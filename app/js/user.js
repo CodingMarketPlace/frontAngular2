@@ -15,6 +15,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
     console.log('disabled' + $scope.isDisabled);
     $scope.loadUserDetail = function () {
         $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $routeParams.userId).success(function (data) {
+                console.log("test                        : " + $scope.myAccount);
             $scope.user = data;
             console.log('user detail : ' + $scope.user.UniqId);
             console.log('coucou: ' + ($scope.IdUserConnected === $routeParams.userId));
@@ -22,6 +23,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
             console.log('user description : ' + $scope.user.Description);
             if ($scope.IdUserConnected === $routeParams.userId)
             {
+                console.log("test                        : " + $scope.myAccount);
                 $scope.myAccount = true;
             }
         });
@@ -45,21 +47,13 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
     // Appending dialog to document.body to cover sidenav in docs app
     // Modal dialogs should fully cover application
     // to prevent interaction outside of dialog
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Modification réussie')
-        .textContent('Vos modifications ont bien été enregistrées..')
-        .ariaLabel('Alert Dialog Demo')
-        .ok('OK')
-    );
+        alert('Vos modifications ont bien été enregistrées..');
   };
 
     $scope.saveModification = function () {
         if ($scope.password === $scope.verif_password) {
             var user_modificated = {Id: $scope.user.Id, Email: $scope.user.Email, Password: $scope.password, Description: $scope.user.Description};
-            $http.post('http://cosingmarketplace.apphb.com/api/Users/Update/' + $scope.user.UniqId, user_modificated).success(function (data) {
+            $http.post('http://localhost:57396/api/Users/Update/' + $scope.user.UniqId, user_modificated).success(function (data) {
                $scope.showAlert();
             });
         }
