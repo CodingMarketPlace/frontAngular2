@@ -12,8 +12,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
-    console.log($rootScope.loggedIn);
     
+    //$scope.user.UniqId = $cookies.get('user_UniqId') === "true" ? true : false;
 
     $scope.erreurLogin = false;
     
@@ -46,12 +46,14 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         Activated: undefined,
         Admin: $cookies.get('user_Admin') === "true" ? true : false || undefined,
         Description: undefined,
-        UniqId: $cookies.get('user_UniqId') === "true" ? true : false || undefined,
+        UniqId: $cookies.get('user_UniqId'),
         ImageUrl: undefined,
         ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
     };
 
+    console.log($scope.user.UniqId);
 
+    $rootScope.user = $scope.user;
 
 //    $scope.login = undefined;
 //    $scope.password = undefined;
@@ -88,7 +90,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;
-            console.log("failure message: " + JSON.stringify({data: data}));
         });
     };
 
@@ -96,7 +97,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.logOut = function () {
         $rootScope.loggedIn = false;
         $scope.user = undefined;
-        console.log($rootScope.loggedIn);
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
         $location.path('#/');
@@ -104,10 +104,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 
     // Recherche d'un project
     $scope.search = function () {
-        console.log('scope : ' + $scope.input.searchText);
-        console.log($location.path());
         $location.path('search-projects/' + $scope.input.searchText);
-        console.log($location.path());
     };
 
     // Accès à mon compte
@@ -165,16 +162,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     // Affectation de valeurs suivant le rôle sélectionné
     $scope.selectChange = function () {
         if ($scope.typeaccount === '1') {
-            console.log("1");
             $scope.inscriptionProjectCreator = true;
             $scope.inscriptionDevelopper = false;
         } else if ($scope.typeaccount === '2') {
-            console.log("2");
             $scope.inscriptionProjectCreator = false;
             $scope.inscriptionDevelopper = true;
         }
-        console.log($scope.inscriptionDevelopper);
-        console.log($scope.inscriptionProjectCreator);
     };
 
     // Affichage d'un alert ou pop-up
