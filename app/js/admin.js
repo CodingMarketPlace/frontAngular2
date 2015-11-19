@@ -12,13 +12,15 @@ adminApp.controller('AdminController', function ($scope, $mdDialog, $location, $
     	$http.get('http://codingmarketplace.apphb.com/api/Users/All').success(function (data) {
             $scope.users = data;
         });
-        if ($rootScope.loggedIn === false) {
+        if ($rootScope.loggedIn === false || $rootScope.isAdmin === false) {
         	$location.path('#/');
         }
     };
 
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
+
+    $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
 
     $scope.loadUsersData();
 
