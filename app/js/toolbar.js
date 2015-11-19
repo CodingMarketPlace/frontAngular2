@@ -96,6 +96,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $cookies.put('user_ProjectCreator', projectCreatorStr);
             $cookies.put('user_Admin', Admin);
             $cookies.put('user_Developper', Developper);
+            $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;
@@ -108,6 +109,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $scope.user = undefined;
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
+        $rootScope.isAdmin = false;
         $location.path('#/');
     };
 
