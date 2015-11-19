@@ -36,7 +36,6 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
         ImageUrl: undefined,
         ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
     };
-    console.log($scope.user);
 
     $scope.isDisabled = ($scope.IdUserConnected === $routeParams.userId) ? false : true;
     $scope.loadUserDetail = function () {

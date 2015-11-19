@@ -51,8 +51,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
     };
 
-    console.log($scope.user.UniqId);
-
     $rootScope.user = $scope.user;
 
 //    $scope.login = undefined;
@@ -153,7 +151,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                     $scope.connection();
                 },
                 error: function (resultat, status) {
-                    console.log(resultat);
                 }
             });
         }
