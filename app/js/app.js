@@ -43,6 +43,10 @@ codingMarketPlaceApp.config(function ($routeProvider) {
                 templateUrl: 'partials/admin/user-management.html',
                 controller: 'AdminController'
             }).
+            when('/forgot-password/:userId', {
+                templateUrl: 'partials/template-forgot-password.html',
+                controller: 'UserController'
+            }).
             otherwise({
                 redirectTo: '/'
             });
