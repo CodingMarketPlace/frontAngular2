@@ -1,10 +1,24 @@
-<div layout-margin layout-padding layout-wrap ng-controller="ProjectController">
+<div layout-margin 
+     layout-padding 
+     layout-wrap 
+     ng-controller="ProjectController">
     <div layout-gt-sm="column">
-        <div class="descProject md-whiteframe-z1" layout-gt-sm="row" layout-margin layout-padding layout-wrap style="width: 75%;margin:auto;">
-            <img src="{{projet.ImageUrl}}" flex-gt="50" flex-sm="100">
-            <div layout="column" layout-wrap>
+        <div class="descProject md-whiteframe-z1" 
+             layout-gt-sm="row" 
+             layout-margin 
+             layout-padding 
+             layout-wrap 
+             style="width: 75%;margin:auto;">
+            <img src="{{projet.ImageUrl}}" 
+                 flex-gt="50" 
+                 flex-sm="100">
+            <div layout="column" 
+                 layout-wrap>
                 <h2>{{projet.Title}}</h2>
-                <a ng-click="showLeaderDetail()" class="descLeader">Par {{leaderProject.FirstName}} {{leaderProject.LastName}}</a>
+                <a ng-click="showLeaderDetail()" 
+                   class="descLeader">
+                    Par {{leaderProject.FirstName}} {{leaderProject.LastName}}
+                </a>
                 <span>
                     <md-icon md-svg-src="img/icons/calendar.svg"></md-icon>
                     Durée estimée : {{projet.Duration}} jours
@@ -18,15 +32,32 @@
                     <label>Description</label>
                     <p flex>{{projet.Description}}</p>
                 </span>
-                <md-button class="md-raised md-primary" ng-click="ApplyProject()">Postuler pour le projet</md-button>
+                <md-button class="md-raised md-primary" 
+                           ng-if="currentLeader" 
+                           ng-click="ApplyProject()">
+                    Postuler pour le projet
+                </md-button>
+                <md-button class="md-raised md-primary"
+                           ng-if="!currentLeader"
+                           ng-click="ValidateProjectDialog()">
+                    Valider le projet
+                </md-button>
             </div>
         </div>    
     </div>
 </div>
 
-<div layout-margin layout-padding layout-wrap ng-controller="UserController">
+<div layout-margin 
+     layout-padding 
+     layout-wrap 
+     ng-controller="UserController">
     <div layout-gt-sm="column">  
-        <div class="descProject md-whiteframe-z1" layout-gt-sm="row" layout-margin layout-padding layout-wrap style="width: 75%; margin:auto;">
+        <div class="descProject md-whiteframe-z1" 
+             layout-gt-sm="row" 
+             layout-margin 
+             layout-padding 
+             layout-wrap 
+             style="width: 75%; margin:auto;">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h3>
@@ -34,13 +65,18 @@
                     </h3>
                 </div>
             </md-toolbar>
-            <span flex="50" ng-repeat="applicant in applicants">
-                <img class="roundedMediumImage" src="{{applicant.ImageUrl}}" flex-gt="50" flex-sm="100">
+            <span flex="50" 
+                  ng-repeat="applicant in applicants">
+                <img class="roundedMediumImage" 
+                     src="{{applicant.ImageUrl}}" 
+                     flex-gt="50" 
+                     flex-sm="100"
+                     flex-md="100">
 
-                <div layout="column" layout-wrap>
+                <div layout="column" 
+                     layout-wrap>
                     <h2>{{applicant.FirstName}} {{applicant.LastName}} <span>({{applicant.Login}})</span></h2>
                     <p>{{applicant.Description}}</p>
-                    <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
                 </div>
             </span>
         </div>    

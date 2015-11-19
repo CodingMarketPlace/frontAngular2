@@ -1,0 +1,20 @@
+<md-dialog aria-label="Validation" 
+           ng-cloak 
+           ng-controller="ProjectController">
+    <md-dialog-content layout-padding 
+                       layout="column">
+        <md-input-container>
+            <md-select ng-model="developperChoose">
+                <md-option ng-repeat="applicant in applicants">
+                    {{applicant.Login}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <md-button class="md-raised md-primary" 
+                       ng-click="ValidateProject()">
+                Valider
+            </md-button>
+        </md-input-container>
+    </md-dialog-content>
+</md-dialog>
