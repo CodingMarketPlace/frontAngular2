@@ -36,10 +36,15 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.screenIsSmall = $mdMedia('sm');
 
     $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+    $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+    $rootScope.isProjectLeader = $cookies.get('user_ProjectCreator') === "true" ? true : false;
+    console.log('admin' + $cookies.get('user_Admin'));
+    console.log('dev' + $cookies.get('user_Developper'));
+    console.log('lead' + $cookies.get('user_ProjectCreator'));
 
     $scope.goAdmin = function() {
         $location.path('admin');
-    }
+    };
 
     $scope.user = {
         Login: $cookies.get('user_login') || undefined,

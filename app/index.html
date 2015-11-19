@@ -39,7 +39,7 @@
             <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true && !screenIsSmall">
+                ng-if="loggedIn === true && !screenIsSmall && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
@@ -95,7 +95,7 @@
                 style="width:100%;"
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true">
+                ng-if="loggedIn === true && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
