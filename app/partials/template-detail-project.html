@@ -4,7 +4,7 @@
             <img src="{{projet.ImageUrl}}" flex-gt="50" flex-sm="100">
             <div layout="column" layout-wrap>
                 <h2>{{projet.Title}}</h2>
-                <p class="descLeader">Par {{projet.IdUser}}</p>
+                <a ng-click="showLeaderDetail()" class="descLeader">Par {{leaderProject.FirstName}} {{leaderProject.LastName}}</a>
                 <span>
                     <md-icon md-svg-src="img/icons/calendar.svg"></md-icon>
                     Durée estimée : {{projet.Duration}} jours
@@ -18,7 +18,7 @@
                     <label>Description</label>
                     <p flex>{{projet.Description}}</p>
                 </span>
-                <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
+                <md-button class="md-raised md-primary" ng-click="ApplyProject()">Postuler pour le projet</md-button>
             </div>
         </div>    
     </div>
@@ -34,31 +34,12 @@
                     </h3>
                 </div>
             </md-toolbar>
-            <span flex="50">
-                <img class="roundedMediumImage" src="{{user.image}}" flex-gt="50" flex-sm="100">
+            <span flex="50" ng-repeat="applicant in applicants">
+                <img class="roundedMediumImage" src="{{applicant.ImageUrl}}" flex-gt="50" flex-sm="100">
 
                 <div layout="column" layout-wrap>
-                    <h2>{{user.firstName}} {{user.lastName}} <span>({{user.login}})</span></h2>
-                    <p>{{user.description}}</p>
-                    <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
-                </div>
-            </span>
-            <hr/>
-            <span flex="50">
-                <img class="roundedMediumImage" src="{{user.image}}" flex-gt="50" flex-sm="100">
-
-                <div layout="column" layout-wrap>
-                    <h2>{{user.firstName}} {{user.lastName}} <span>({{user.login}})</span></h2>
-                    <p>{{user.description}}</p>
-                    <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
-                </div>
-            </span>
-            <span flex="50">
-                <img class="roundedMediumImage" src="{{user.image}}" flex-gt="50" flex-sm="100">
-
-                <div layout="column" layout-wrap>
-                    <h2>{{user.firstName}} {{user.lastName}} <span>({{user.login}})</span></h2>
-                    <p>{{user.description}}</p>
+                    <h2>{{applicant.FirstName}} {{applicant.LastName}} <span>({{applicant.Login}})</span></h2>
+                    <p>{{applicant.Description}}</p>
                     <md-button class="md-raised md-primary">Postuler pour le projet</md-button>
                 </div>
             </span>
