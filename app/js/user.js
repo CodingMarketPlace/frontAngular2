@@ -63,7 +63,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
         if ($scope.password === $scope.verif_password) {
             id = $routeParams.userId;
             var reset_password = {Id: 0, Password: $scope.password, UniqId: id};
-            $http.post('http://localhost:57396/api/Users/ForgottenPassword/' + id, reset_password).success(function (data) {
+            $http.post('http://localhost:57396/api/Users/Update/' + id, reset_password).success(function (data) {
                 alert("Mot de passe changé !");
              });
         }
