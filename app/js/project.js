@@ -18,6 +18,7 @@ projectApp.controller('ProjectController',
             $scope.currentLeader;
 
             $scope.alreadyApplied;
+            $scope.developperChoose;
 
             $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
 
@@ -56,7 +57,16 @@ projectApp.controller('ProjectController',
             };
 
             $scope.ValidateProject = function () {
+                var choice = {Id: $scope.projet.Id, UniqId: $scope.developperChoose};
+                $http.post('http://codingmarketplace.apphb.com/api/Projects/Validate/' + $scope.IdCurrentUser, choice).success(function () {
+                    $route.reload();
+                });
+            };
 
+            $scope.FinishProject = function () {
+                $http.post('http://codingmarketplace.apphb.com/api/Projects/Finish/' + $scope.projet.IdUser, $scope.projet.Id).success(function () {
+                    $route.reload();
+                });
             };
 
 
