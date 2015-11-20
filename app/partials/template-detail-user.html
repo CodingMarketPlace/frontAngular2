@@ -1,14 +1,8 @@
-<div class="account md-whiteframe-z1" layout-margin layout-padding layout-wrap ng-controller="UserController">
-    <h2>Détails du compte</h2>
+<div class="account md-whiteframe-z1" layout-margin layout-wrap ng-controller="UserController">
+    <h2 class="layout-padding ">Détails du compte</h2>
     <div layout-gt-sm="column">
-        <div layout-gt-sm="row" 
-             layout-margin 
-             layout-padding 
-             layout-wrap>
-            <img class="roundedMediumImage" 
-                 src="{{user.ImageUrl}}" 
-                 flex-gt="50" 
-                 flex-sm="100">
+        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
+            <img class="testimonial-picture" src="{{user.ImageUrl}}" flex-gt="50"  flex-sm="100">
             <div layout="column" layout-wrap flex>
                 <h3>{{user.FirstName}} {{user.LastName}}<span>({{user.Login}})</span></h3>
                 <h4 flex>E-mail : </h4>
@@ -83,11 +77,10 @@
 </div>
 
 <div class="account md-whiteframe-z1" 
-     layout-margin 
-     layout-padding 
+     layout-margin  
      layout-wrap
      ng-if="isDevelopper">
-    <h2>Projets en cours</h2>
+    <h2 class="layout-padding ">Projets en cours</h2>
     <h3>{{user.FirstName}} postule actuellement pour les projets suivants :</h3>
     <div layout-gt-sm="column">
         <div layout-gt-sm="row" 
@@ -118,11 +111,10 @@
 </div>
 
 <div class="account md-whiteframe-z1" 
-     layout-margin 
-     layout-padding 
+     layout-margin
      layout-wrap
      ng-if="isDevelopper">
-    <h2>Projets terminés</h2>
+    <h2 class="layout-padding ">Projets terminés</h2>
     <h3>{{user.FirstName}} a réalisé les projets suivants :</h3>
     <div layout-gt-sm="column">
         <div layout-gt-sm="row" 
