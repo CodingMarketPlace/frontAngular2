@@ -84,7 +84,11 @@
                 </md-input-container>
             </span>
             <span layout-gt-sm="row" layout-wrap>
-                <label>Photo de profil</label><input type="file" name="Télécharger un fichier" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                <div class="form_controls">
+                    <div class="upload_button_holder">
+                        <div href="#" class="upload_button" ngf-select="uploadFiles($files)" multiple title="upload" resetOnClick="true" >Upload</div>
+                    </div>
+                </div>
             </span>
             <span layout-gt-sm="row">
                 <div id="g_recaptcha" flex-offset="25"></div>

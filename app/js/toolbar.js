@@ -125,27 +125,11 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('user/' + $rootScope.user['UniqId']);
     };
 
-    $scope.uploadFile = function(files) {
-        var fd = new FormData();
-        //Take the first selected file
-        fd.append("file", files[0]);
-
-        console.log(files[0]);
-
-        /*$http.post("img/test.jpg", fd, {
-            withCredentials: true,
-            headers: {'Content-Type': undefined },
-            transformRequest: angular.identity
-        }).success(function(data) {
-        }).error(function() {
-        });*/
-    };
-
     // Création d'un project
     $scope.createProject = function () {
         var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: ''};
         
-        $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/' + $rootScope.user['UniqId'], project).success(function(data) {
+        $http.post('http://localhost:57396/api/Projects/Create/' + $rootScope.user['UniqId'], project).success(function(data) {
             $scope.hide();
             alert('Le projet a été créé avec succès');
         });
