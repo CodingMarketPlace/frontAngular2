@@ -18,6 +18,7 @@ projectApp.controller('ProjectController',
             $scope.currentLeader;
 
             $scope.alreadyApplied;
+            $scope.developperChoose;
 
             $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
 
@@ -32,7 +33,8 @@ projectApp.controller('ProjectController',
             };
 
             $scope.ApplyProject = function () {
-                $http.post('http://codingmarketplace.apphb.com/api/Projects/Apply/' + $scope.IdCurrentUser, $scope.projet.Id).success(function () {
+                var projet = {Id: $scope.projet.Id}
+                $http.post('http://codingmarketplace.apphb.com/api/Projects/Apply/' + $scope.IdCurrentUser, projet).success(function () {
                     $route.reload();
                 }).error(function () {
                     alert("Une erreur est survenue...");
@@ -56,7 +58,17 @@ projectApp.controller('ProjectController',
             };
 
             $scope.ValidateProject = function () {
+                var choice = {Id: $scope.projet.Id, IdUser: $scope.developperChoose};
+                $http.post('http://codingmarketplace.apphb.com/api/Projects/Validate/' + $scope.IdCurrentUser, choice).success(function () {
+                    $route.reload();
+                });
+            };
 
+            $scope.FinishProject = function () {
+                var project = {Id: $scope.projet.Id}
+                $http.post('http://codingmarketplace.apphb.com/api/Projects/Finish/' + $scope.projet.IdUser, project).success(function () {
+                    $route.reload();
+                });
             };
 
 

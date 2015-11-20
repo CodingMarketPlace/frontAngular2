@@ -72,7 +72,7 @@
     <md-sidenav ng-if="screenIsSmall" id="sidenav" class="md-sidenav-left md-whiteframe-z2"
         md-component-id="left" layout-wrap>
             <span layout="row" layout-padding layout-margin>
-            <md-input-container style="margin-bottom: 0px;" 
+            <md-input-container style=" margin:0;" 
                                 ng-if="loggedIn === true" flex>
                 <input ng-model="input.searchText"
                        placeholder="Rechercher un projet" flex>
@@ -86,21 +86,21 @@
             </span>
             <span flex></span>
             <md-button 
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Gestion Admin" 
                 ng-click="goAdmin()"
                 ng-if="loggedIn === true && isAdmin">
                 Gestion Admin
             </md-button>
             <md-button 
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
                 ng-if="loggedIn === true && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Mon compte" 
                 ng-click="myAccount()"
                 ng-if="loggedIn === true">
@@ -108,21 +108,21 @@
             </md-button>
             
             <md-button 
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
                 ng-if="loggedIn !== true">
                 Connexion
             </md-button>
             <md-button 
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Inscription"
                 ng-click="showDialogInscription($event)"
                 ng-if="loggedIn !== true">
                 Inscription
             </md-button>
             <md-button
-                style="width:100%;"
+                style="width:100%; margin:0;"
                 aria-label="Déconnexion"
                 ng-click="logOut()"
                 ng-if="loggedIn === true">

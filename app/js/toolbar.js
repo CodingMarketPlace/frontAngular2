@@ -130,15 +130,15 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         //Take the first selected file
         fd.append("file", files[0]);
 
-        $http.post("img/test.jpg", fd, {
+        console.log(files[0]);
+
+        /*$http.post("img/test.jpg", fd, {
             withCredentials: true,
             headers: {'Content-Type': undefined },
             transformRequest: angular.identity
         }).success(function(data) {
-            console.log("ok");
         }).error(function() {
-            console.log("not ok");
-        });
+        });*/
     };
 
     // Création d'un project

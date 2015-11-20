@@ -33,13 +33,18 @@
                     <p flex>{{projet.Description}}</p>
                 </span>
                 <md-button class="md-raised md-primary" 
-                           ng-if="!currentLeader && isDevelopper && !alreadyApplied" 
+                           ng-if="!currentLeader && isDevelopper && !alreadyApplied && !projet.over && !projet.started" 
                            ng-click="ApplyProject()">
                     Postuler pour le projet
                 </md-button>
                 <md-button class="md-raised md-primary"
-                           ng-if="currentLeader"
+                           ng-if="currentLeader && !projet.over"
                            ng-click="ValidateProjectDialog()">
+                    Valider le projet
+                </md-button>
+                <md-button class="md-raised md-primary"
+                           ng-if="currentLeader && !projet.over && projet.started"
+                           ng-click="FinishProject()">
                     Valider le projet
                 </md-button>
             </div>
@@ -57,7 +62,14 @@
              layout-padding 
              layout-wrap 
              style="width: 75%; margin:auto;">
-            <md-toolbar>
+            <md-toolbar  ng-if="projet.started">
+                <div class="md-toolbar-tools">
+                    <h3>
+                        Développeur réalisant ce projet
+                    </h3>
+                </div>
+            </md-toolbar>
+            <md-toolbar  ng-if="!projet.started">
                 <div class="md-toolbar-tools">
                     <h3>
                         Développeurs postulants au projet
