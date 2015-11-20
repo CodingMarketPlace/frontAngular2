@@ -60,12 +60,13 @@ projectApp.controller('ProjectController',
             $scope.ValidateProject = function () {
                 var choice = {Id: $scope.projet.Id, IdUser: $scope.developperChoose};
                 $http.post('http://codingmarketplace.apphb.com/api/Projects/Validate/' + $scope.IdCurrentUser, choice).success(function () {
+                    $scope.hide();
                     $route.reload();
                 });
             };
 
             $scope.FinishProject = function () {
-                var project = {Id: $scope.projet.Id}
+                var project = {Id: $scope.projet.Id};
                 $http.post('http://codingmarketplace.apphb.com/api/Projects/Finish/' + $scope.projet.IdUser, project).success(function () {
                     $route.reload();
                 });

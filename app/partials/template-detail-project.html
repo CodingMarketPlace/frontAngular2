@@ -13,7 +13,8 @@
                  flex-gt="50" 
                  flex-sm="100">
             <div layout="column" 
-                 layout-wrap>
+                 layout-wrap
+                 layout-padding>
                 <h2>{{projet.Title}}</h2>
                 <a ng-click="showLeaderDetail()" 
                    class="descLeader">
@@ -38,14 +39,14 @@
                     Postuler pour le projet
                 </md-button>
                 <md-button class="md-raised md-primary"
-                           ng-if="currentLeader && !projet.over"
+                           ng-if="currentLeader && !projet.over && !projet.started"
                            ng-click="ValidateProjectDialog()">
                     Valider le projet
                 </md-button>
                 <md-button class="md-raised md-primary"
                            ng-if="currentLeader && !projet.over && projet.started"
                            ng-click="FinishProject()">
-                    Valider le projet
+                    Terminer le projet
                 </md-button>
             </div>
         </div>    

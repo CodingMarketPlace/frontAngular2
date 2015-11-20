@@ -1,9 +1,20 @@
-<div class="account md-whiteframe-z1" layout-margin layout-wrap ng-controller="UserController">
+<div class="account md-whiteframe-z1" 
+     layout-margin 
+     layout-wrap
+     ng-controller="UserController">
     <h2 class="layout-padding ">Détails du compte</h2>
     <div layout-gt-sm="column">
-        <div layout-gt-sm="row" layout-margin layout-padding layout-wrap>
-            <img class="testimonial-picture" src="{{user.ImageUrl}}" flex-gt="50"  flex-sm="100">
-            <div layout="column" layout-wrap flex>
+        <div layout-gt-sm="row" 
+             layout-margin 
+             layout-padding
+             layout-wrap>
+            <img class="testimonial-picture" 
+                 src="{{user.ImageUrl}}" 
+                 flex-gt="50" 
+                 flex-sm="100">
+            <div layout="column"
+                 layout-wrap 
+                 flex>
                 <h3>{{user.FirstName}} {{user.LastName}}<span>({{user.Login}})</span></h3>
                 <h4 flex>E-mail : </h4>
                 <md-input-container> 

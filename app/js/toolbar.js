@@ -1,4 +1,4 @@
-var toolbarApp = angular.module('toolbarApp', ['ngMaterial']);
+var toolbarApp = angular.module('toolbarApp', ['ngMaterial', 'ngFileUpload']);
 
 toolbarApp.config(function ($httpProvider) {
     //Enable cross domain calls
@@ -127,9 +127,9 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 
     // Création d'un project
     $scope.createProject = function () {
-        var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: ''};
+        var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: $rootScope.ImageUrlSaved, CreationDate: ''};
         
-        $http.post('http://localhost:57396/api/Projects/Create/' + $rootScope.user['UniqId'], project).success(function(data) {
+        $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/' + $rootScope.user['UniqId'], project).success(function(data) {
             $scope.hide();
             alert('Le projet a été créé avec succès');
         });
@@ -156,7 +156,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         }
 
         if ($scope.fieldMissing === false && $scope.notAgreed === false && $scope.captchaNotValidated === false && $scope.password === $scope.verif_password) {
-            var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: $scope.description, ImageUrl: ""};
+            var identification = {Id: 0, Email: $scope.mail, Password: $scope.password, Login: $scope.login, Activated: false, Developper: $scope.inscriptionDevelopper, ProjectCreator: $scope.inscriptionProjectCreator, FirstName: $scope.firstname, LastName: $scope.lastname, Admin: false, UniqId: "", Description: $scope.description, ImageUrl: $rootScope.ImageUrlSaved};
 
             $.ajax({
                 type: "POST",
@@ -288,7 +288,59 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $rootScope.closeSideNavPanel = function() {
         $mdSidenav('left').close();
     };
-});
+}).controller('photoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Upload',
+  /* Uploading with Angular File Upload */
+  function($scope, $rootScope, $routeParams, $location, $upload) {
+    var d = new Date();
+    $scope.title = "Image (" + d.getDate() + " - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
+    //$scope.$watch('files', function() {
+    $scope.uploadFiles = function(files){
+      $scope.files = files;
+      if (!$scope.files) return;
+      angular.forEach(files, function(file){
+        if (file && !file.$error) {
+          file.upload = $upload.upload({
+            url: "https://api.cloudinary.com/v1_1/" + $.cloudinary.config().cloud_name + "/upload",
+            fields: {
+              upload_preset: $.cloudinary.config().upload_preset,
+              tags: 'myphotoalbum',
+              context: 'photo=' + $scope.title
+            },
+            file: file
+          }).progress(function (e) {
+            file.progress = Math.round((e.loaded * 100.0) / e.total);
+            file.status = "Uploading... " + file.progress + "%";
+          }).success(function (data, status, headers, config) {
+            $rootScope.photos = $rootScope.photos || [];
+            data.context = {custom: {photo: $scope.title}};
+            file.result = data;
+            $rootScope.photos.push(data);
+            $rootScope.ImageUrlSaved = file.result.url;
+          }).error(function (data, status, headers, config) {
+            file.result = data;
+          });
+        }
+      });
+    };
+    //});
+
+    /* Modify the look and fill of the dropzone when files are being dragged over it */
+    $scope.dragOverClass = function($event) {
+      var items = $event.dataTransfer.items;
+      var hasFile = false;
+      if (items != null) {
+        for (var i = 0 ; i < items.length; i++) {
+          if (items[i].kind == 'file') {
+            hasFile = true;
+            break;
+          }
+        }
+      } else {
+        hasFile = true;
+      }
+      return hasFile ? "dragover" : "dragover-err";
+    };
+  }]);
 
 // Controller pour l'ouverture des différentes pop-up
 function DialogController($scope, $mdDialog) {

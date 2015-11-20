@@ -13,6 +13,7 @@
     "angular-animate": "1.4.x",
     "angular-material": "latest",
     "angular-cookies": "latest",
-    "cloudinary_ng": "#master"
+    "cloudinary_ng": "#master",
+    "ng-file-upload": "latest"
   }
 }

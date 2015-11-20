@@ -1,61 +1,70 @@
 var adminApp = angular.module('adminApp', []);
 
-adminApp.controller('AdminController', function ($scope, $mdDialog, $location, $routeParams, $http, $rootScope, $cookies, $route) {
-    
-    $scope.selectedUser = {};
+adminApp.controller('AdminController',
+        function (
+                $scope,
+                $location,
+                $http,
+                $rootScope,
+                $cookies,
+                $route)
+        {
 
-    $scope.UserManagement = function () {
-      $location.path('/admin/user-management');
-    };
-
-    $scope.loadUsersData = function() {
-    	$http.get('http://codingmarketplace.apphb.com/api/Users/All').success(function (data) {
-            $scope.users = data;
-        });
-        if ($rootScope.loggedIn === false || $rootScope.isAdmin === false) {
-        	$location.path('#/');
-        }
-    };
-
-    $test = $cookies.get('loggedIn');
-    $rootScope.loggedIn = ($test === "true");
-
-    $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
-
-    $scope.loadUsersData();
-
-    $scope.adminId = "525113112015140402";
-
-    $scope.deleteUser = function(id) {
-
-    	var userToDelete = {UniqId: id};
-    	var identification = {password: "test", login: "test"};
-
-		$http({ url: 'http://codingmarketplace.apphb.com/api/Users/Delete/' + $scope.adminId, 
-                method: 'DELETE', 
-                data: userToDelete, 
-                headers: {"Content-Type": "application/json;charset=utf-8"}
-        }).success(function(res) {
-        	$route.reload();
-        }, function(error) {
-        });
-    };
-   
-     $scope.updateUser = function (id, admin, projetCreator, Dev) {
-
-        var updateUser = {ID: 0, Admin: admin, ProjectCreator : projetCreator, Developper: Dev, UniqId: id};
-        $http.post('http://codingmarketplace.apphb.com/api/users/ChangeRole/'+$scope.adminId, updateUser).success(function (data) {
-             
-             alert(data);
-        })
-        .error(function (data) {
+            $scope.selectedUser = {};
             
-            alert("Une errreur est survenue !");
-        });
-        
-    };
+            $scope.queryFilter = '';
 
-});
+            $scope.UserManagement = function () {
+                $location.path('/admin/user-management');
+            };
+
+            $scope.loadUsersData = function () {
+                $http.get('http://codingmarketplace.apphb.com/api/Users/All').success(function (data) {
+                    $scope.users = data;
+                });
+                if ($rootScope.loggedIn === false || $rootScope.isAdmin === false) {
+                    $location.path('#/');
+                }
+            };
+
+            $test = $cookies.get('loggedIn');
+            $rootScope.loggedIn = ($test === "true");
+
+            $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+
+            $scope.loadUsersData();
+
+            $scope.adminId = "525113112015140402";
+
+            $scope.deleteUser = function (id) {
+
+                var userToDelete = {UniqId: id};
+
+                $http({url: 'http://codingmarketplace.apphb.com/api/Users/Delete/' + $scope.adminId,
+                    method: 'DELETE',
+                    data: userToDelete,
+                    headers: {"Content-Type": "application/json;charset=utf-8"}
+                }).success(function (res) {
+                    $route.reload();
+                }, function (error) {
+                });
+            };
+
+            $scope.updateUser = function (id, admin, projetCreator, Dev) {
+
+                var updateUser = {ID: 0, Admin: admin, ProjectCreator: projetCreator, Developper: Dev, UniqId: id};
+                $http.post('http://codingmarketplace.apphb.com/api/users/ChangeRole/' + $scope.adminId, updateUser).success(function (data) {
+
+                    alert(data);
+                })
+                        .error(function (data) {
+
+                            alert("Une errreur est survenue !");
+                        });
+
+            };
+
+        });
 
 
 //Controller pour l'ouverture des différentes pop-up
@@ -70,4 +79,3 @@ function DialogController($scope, $mdDialog) {
         $mdDialog.hide(answer);
     };
 }
-
