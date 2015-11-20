@@ -1,6 +1,6 @@
 var userApp = angular.module('userApp', []);
 
-userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeParams, $rootScope, $cookies, $mdMedia) {
+userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeParams, $rootScope, $cookies, $mdMedia, $location) {
 
     $scope.myAccount = false;
 
@@ -85,7 +85,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
             var reset_password = {Password: $scope.password, UniqId: id};
             $http.post('http://codingmarketplace.apphb.com/api/Users/ResetPassword/' + id, reset_password).success(function (data) {
                 alert("Mot de passe changé !");
-                $location.path('#/');
+                $location.path('/');
             });
         };
     };
