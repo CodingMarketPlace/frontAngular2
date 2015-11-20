@@ -38,9 +38,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
     $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
     $rootScope.isProjectLeader = $cookies.get('user_ProjectCreator') === "true" ? true : false;
-    console.log('admin' + $cookies.get('user_Admin'));
-    console.log('dev' + $cookies.get('user_Developper'));
-    console.log('lead' + $cookies.get('user_ProjectCreator'));
 
     $scope.goAdmin = function() {
         $location.path('admin');
@@ -109,6 +106,9 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $scope.user = undefined;
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
+        $cookies.put('user_Developper', "false");
+        $cookies.put('user_Admin', "false");
+        $cookies.put('user_ProjectCreator', "false");
         $rootScope.isAdmin = false;
         $location.path('#/');
     };

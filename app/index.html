@@ -133,8 +133,8 @@
     </md-content>
 
     <div flex>
-        <footer>
-            <a href="">Contactez-nous !</a>
+        <footer ng-controller="FooterCtrl">
+            <a ng-click="showDialogContact($event)">Contactez-nous !</a>
             <a href="#/legal-notice">Mentions légales</a>
             <div>Conding Market Place - © PREB S.A.S.</div>
         </footer>
@@ -156,5 +156,6 @@
     <script src="js/project.js"></script>
     <script src="js/user.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>
