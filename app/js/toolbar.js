@@ -250,11 +250,18 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
 
     // Demande à l'api l'envoi de mail pour Mot de passe oublié
     $scope.sendMailForNewPassword = function (e) {
-        $http.get('http://codingmarketplace.apphb.com/api/Users/ForgottenPass/' + $scope.email).success(function(data) {
-            alert("Un mail vous a été envoyé !");  
-        }).error(function (data) {
-            alert("Une erreur est survenue."); 
-        }); 
+        var identification = {Email: $scope.email};
+        $.ajax({
+            type: "POST",
+            url: "http://codingmarketplace.apphb.com/api/Users/ForgottenPass/",
+            contentType: "application/json",
+            data: JSON.stringify(identification),
+            success: function (data) {
+                alert("Un mail vous a été envoyé !");
+            },
+            error: function (resultat, status) {
+            }
+        });
     }
 
     // Affichage  pop-up d'inscription
