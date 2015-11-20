@@ -74,7 +74,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
     $scope.saveModification = function () {
         if ($scope.password === $scope.verif_password) {
             var user_modificated = {Id: $scope.user.Id, Email: $scope.user.Email, Password: $scope.password, Description: $scope.user.Description};
-            $http.post('http://localhost:57396/api/Users/Update/' + $scope.user.UniqId, user_modificated).success(function (data) {
+            $http.post('http://codingmarketplace.apphb.com/api/Users/Update/' + $scope.user.UniqId, user_modificated).success(function (data) {
                 $scope.showAlert();
             });
         }
@@ -84,7 +84,7 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
         if ($scope.password === $scope.verif_password) {
             id = $routeParams.userId;
             var reset_password = {Id: 0, Password: $scope.password, UniqId: id};
-            $http.post('http://localhost:57396/api/Users/Update/' + id, reset_password).success(function (data) {
+            $http.post('http://codingmarketplace.apphb.com/api/Users/Update/' + id, reset_password).success(function (data) {
                 alert("Mot de passe changé !");
             });
         }
