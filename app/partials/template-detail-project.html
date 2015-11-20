@@ -33,12 +33,12 @@
                     <p flex>{{projet.Description}}</p>
                 </span>
                 <md-button class="md-raised md-primary" 
-                           ng-if="currentLeader" 
+                           ng-if="!currentLeader && isDevelopper && !alreadyApplied" 
                            ng-click="ApplyProject()">
                     Postuler pour le projet
                 </md-button>
                 <md-button class="md-raised md-primary"
-                           ng-if="!currentLeader"
+                           ng-if="currentLeader"
                            ng-click="ValidateProjectDialog()">
                     Valider le projet
                 </md-button>
@@ -49,8 +49,7 @@
 
 <div layout-margin 
      layout-padding 
-     layout-wrap 
-     ng-controller="UserController">
+     layout-wrap>
     <div layout-gt-sm="column">  
         <div class="descProject md-whiteframe-z1" 
              layout-gt-sm="row" 

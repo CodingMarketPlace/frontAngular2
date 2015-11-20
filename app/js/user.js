@@ -11,6 +11,8 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
 
     $scope.screenSmall = $mdMedia('sm');
     
+    $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+    
     $scope.projects = loadUserProjects();
     
     function loadUserProjects() {

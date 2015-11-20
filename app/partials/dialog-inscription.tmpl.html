@@ -47,7 +47,7 @@
                 </md-input-container>
             </span>
             <span layout-gt-sm="row" layout-wrap>
-                <md-input-container flex="60">
+                <md-input-container flex>
                     <label>Adresse e-mail *</label>
                     <md-icon md-svg-src="img/icons/mail.svg" style="color: #1E90FF; margin-top: 28px;"></md-icon>
                     <input type="email" ng-model="mail" placeholder="Adresse e-mail" required>
@@ -57,11 +57,11 @@
                 <md-input-container flex="50">
                     <label>Mot de passe *</label>
                     <md-icon md-svg-src="img/icons/password.svg" style="color: #FF8C00; margin-top: 28px;"></md-icon>
-                    <input ng-model="password" placeholder="Mot de passe" required>
+                    <input ng-model="password" type="password" placeholder="Mot de passe" required>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>Vérification du mot de passe *</label>
-                    <input ng-model="verif_password" placeholder="Vérification du mot de passe" compare-to="password">
+                    <input ng-model="verif_password" type="password" placeholder="Vérification du mot de passe" compare-to="password">
                 </md-input-container>
             </span>
             <span layout-gt-sm="row" layout-wrap>
@@ -87,7 +87,7 @@
                 <label>Photo de profil</label><input type="file" name="Télécharger un fichier" onchange="angular.element(this).scope().uploadFile(this.files)"/>
             </span>
             <span layout-gt-sm="row">
-                <div id="g_recaptcha"></div>
+                <div id="g_recaptcha" flex-offset="25"></div>
             </span>
             <br/>
             <span layout-gt-sm="row">

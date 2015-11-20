@@ -10,7 +10,8 @@ var codingMarketPlaceApp = angular.module('CodingMarketPlaceApp', [
     'projectsApp',
     'projectApp',
     'userApp',
-    'adminApp'
+    'adminApp',
+    'footerApp'
 ]);
 
 codingMarketPlaceApp.config(function ($routeProvider) {
@@ -42,6 +43,10 @@ codingMarketPlaceApp.config(function ($routeProvider) {
             when('/admin/user-management', {
                 templateUrl: 'partials/admin/user-management.html',
                 controller: 'AdminController'
+            }).
+            when('/contact', {
+                templateUrl: 'partials/template-contact.tmpl.html',
+                controller: ''
             }).
             when('/forgot-password/:userId', {
                 templateUrl: 'partials/template-forgot-password.html',

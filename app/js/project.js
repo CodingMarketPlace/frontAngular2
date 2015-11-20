@@ -17,6 +17,10 @@ projectApp.controller('ProjectController',
 
             $scope.currentLeader;
 
+            $scope.alreadyApplied;
+
+            $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+
             $scope.applicants = {};
             $scope.leaderProject = {};
             $rootScope.loggedIn = $cookies.get('loggedIn') === "true" ? true : false;
@@ -50,27 +54,36 @@ projectApp.controller('ProjectController',
                             $scope.status = 'You cancelled the dialog.';
                         });
             };
-            
+
             $scope.ValidateProject = function () {
-                
+
             };
 
 
-    function loadProjectDetail() {
-        $http.get('http://codingmarketplace.apphb.com/api/Projects/Detail/' + $scope.IdProject).success(function (data) {
-            $scope.projet = data;
-            $http.get('http://codingmarketplace.apphb.com/api/Projects/UsersApplied/' + $scope.IdProject).success(function (data) {
-                $scope.applicants = data;
-            });
-            $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $scope.projet.IdUser).success(function (data) {
-                $scope.leaderProject = data;
-            });
-            $scope.currentLeader = $scope.IdCurrentUser === $scope.leaderProject.Id ? true : false;
-        }).error(function () {
-            alert("Erreur du chargement des postulants au projet.");
+            function loadProjectDetail() {
+                $http.get('http://codingmarketplace.apphb.com/api/Projects/Detail/' + $scope.IdProject).success(function (data) {
+                    $scope.projet = data;
+                    $http.get('http://codingmarketplace.apphb.com/api/Projects/UsersApplied/' + $scope.IdProject).success(function (data) {
+                        $scope.applicants = data;
+                        angular.forEach($scope.applicants, function (value) {
+                            if (value.UniqId === $scope.IdCurrentUser) {
+                                $scope.alreadyApplied = true;
+                            }
+                        });
+                    });
+                    $http.get('http://codingmarketplace.apphb.com/api/Users/Detail/' + $scope.projet.IdUser).success(function (data) {
+                        $scope.leaderProject = data;
+                    });
+
+                }).error(function () {
+                    alert("Erreur du chargement des postulants au projet.");
+                });
+            }
+            $scope.currentLeader = $scope.IdCurrentUser === $scope.leaderProject.UniqId ? true : false;
+            console.log($scope.IdCurrentUser);
+            console.log($scope.leaderProject.Id);
+            console.log($scope.currentLeader);
         });
-    }
-});
 
 // Controller pour l'ouverture des différentes pop-up
 function DialogController($scope, $mdDialog) {

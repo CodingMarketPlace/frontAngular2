@@ -36,10 +36,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.screenIsSmall = $mdMedia('sm');
 
     $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+    $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+    $rootScope.isProjectLeader = $cookies.get('user_ProjectCreator') === "true" ? true : false;
 
     $scope.goAdmin = function() {
         $location.path('admin');
-    }
+    };
 
     $scope.user = {
         Login: $cookies.get('user_login') || undefined,
@@ -104,6 +106,9 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $scope.user = undefined;
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
+        $cookies.put('user_Developper', "false");
+        $cookies.put('user_Admin', "false");
+        $cookies.put('user_ProjectCreator', "false");
         $rootScope.isAdmin = false;
         $location.path('#/');
     };
@@ -226,6 +231,31 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                     $scope.status = 'You cancelled the dialog.';
                 });
     };
+
+    // Affichage pop-up mot de passe oublié
+    $scope.showDialogForgotPassword = function (e) {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'partials/dialog-forgot-password.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: e,
+            clickOutsideToClose: true
+        })
+        .then(function (answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+        }, function () {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
+
+    // Demande à l'api l'envoi de mail pour Mot de passe oublié
+    $scope.sendMailForNewPassword = function (e) {
+        $http.get('http://codingmarketplace.apphb.com/api/Users/ForgottenPass/' + $scope.email).success(function(data) {
+            alert("Un mail vous a été envoyé !");  
+        }).error(function (data) {
+            alert("Une erreur est survenue."); 
+        }); 
+    }
 
     // Affichage  pop-up d'inscription
     $scope.showDialogInscription = function (ev) {

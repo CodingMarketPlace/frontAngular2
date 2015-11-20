@@ -5,6 +5,7 @@
         <title>Coding Market Place</title>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="css/app.css"/>
     </head>
     <body id="allProjects" md-swipe-right="openSideNavPanel()" md-swipe-left="closeSideNavPanel()">
@@ -39,7 +40,7 @@
             <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true && !screenIsSmall">
+                ng-if="loggedIn === true && !screenIsSmall && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
@@ -95,7 +96,7 @@
                 style="width:100%;"
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true">
+                ng-if="loggedIn === true && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
@@ -133,8 +134,8 @@
     </md-content>
 
     <div flex>
-        <footer>
-            <a href="">Contactez-nous !</a>
+        <footer ng-controller="FooterCtrl">
+            <a ng-click="showDialogContact($event)">Contactez-nous !</a>
             <a href="#/legal-notice">Mentions légales</a>
             <div>Conding Market Place - © PREB S.A.S.</div>
         </footer>
@@ -156,5 +157,6 @@
     <script src="js/project.js"></script>
     <script src="js/user.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>
