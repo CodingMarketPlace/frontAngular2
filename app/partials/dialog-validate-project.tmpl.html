@@ -7,8 +7,10 @@
         <h2 flex>Validation du projet {{projet.Title}}</h2>
         <md-input-container> 
             <label>Choisissez le développeur auquel vous avez donné ce projet :</label>
-            <md-select ng-model="developperChoose" placeholder="Choisissez le développeur auquel vous avez donné ce projet">
-                <md-option ng-repeat="applicant in applicants" ng-value="applicant.UniqId">
+            <md-select ng-model="developperChoose" 
+                       placeholder="Choisissez le développeur auquel vous avez donné ce projet">
+                <md-option ng-repeat="applicant in applicants" 
+                           ng-value="applicant.UniqId">
                     {{applicant.FirstName}} {{applicant.LastName}} ({{applicant.Login}})
                 </md-option>
             </md-select>
