@@ -3,9 +3,7 @@ var adminApp = angular.module('adminApp', []);
 adminApp.controller('AdminController',
         function (
                 $scope,
-                $mdDialog,
                 $location,
-                $routeParams,
                 $http,
                 $rootScope,
                 $cookies,
@@ -13,6 +11,8 @@ adminApp.controller('AdminController',
         {
 
             $scope.selectedUser = {};
+            
+            $scope.queryFilter = '';
 
             $scope.UserManagement = function () {
                 $location.path('/admin/user-management');
@@ -79,4 +79,3 @@ function DialogController($scope, $mdDialog) {
         $mdDialog.hide(answer);
     };
 }
-
