@@ -82,11 +82,12 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
     $scope.resetPassword = function () {
         if ($scope.password === $scope.verif_password) {
             id = $routeParams.userId;
-            var reset_password = {Id: 0, Password: $scope.password, UniqId: id};
-            $http.post('http://codingmarketplace.apphb.com/api/Users/Update/' + id, reset_password).success(function (data) {
+            var reset_password = {Password: $scope.password, UniqId: id};
+            $http.post('http://codingmarketplace.apphb.com/api/Users/ResetPassword/' + id, reset_password).success(function (data) {
                 alert("Mot de passe changé !");
+                $location.path('#/');
             });
-        }
+        };
     };
 
     $scope.loadUserDetail();
