@@ -65,7 +65,8 @@ projectApp.controller('ProjectController',
             };
 
             $scope.FinishProject = function () {
-                $http.post('http://codingmarketplace.apphb.com/api/Projects/Finish/' + $scope.projet.IdUser, $scope.projet.Id).success(function () {
+                var project = {Id: $scope.projet.Id}
+                $http.post('http://localhost:57396/api/Projects/Finish/' + $scope.projet.IdUser, project).success(function () {
                     $route.reload();
                 });
             };
