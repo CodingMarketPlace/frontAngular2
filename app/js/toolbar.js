@@ -94,6 +94,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $cookies.put('user_Admin', Admin);
             $cookies.put('user_Developper', Developper);
             $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+            $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+            $rootScope.isProjectLeader = $cookies.get('user_ProjectCreator') === "true" ? true : false;
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;

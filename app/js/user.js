@@ -19,7 +19,6 @@ userApp.controller('UserController', function ($scope, $mdDialog, $http, $routeP
       $http.get('http://codingmarketplace.apphb.com/api/Projects/AllForUser/' + $routeParams.userId).success(function(data) {
         $scope.projects = data;  
       }).error(function (data) {
-         alert("Erreur lors du chargement des projets"); 
       }); 
     };
 

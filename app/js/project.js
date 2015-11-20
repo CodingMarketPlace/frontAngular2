@@ -63,6 +63,7 @@ projectApp.controller('ProjectController',
             function loadProjectDetail() {
                 $http.get('http://codingmarketplace.apphb.com/api/Projects/Detail/' + $scope.IdProject).success(function (data) {
                     $scope.projet = data;
+                    $scope.currentLeader = $scope.IdCurrentUser === $scope.projet.IdUser ? true : false;
                     $http.get('http://codingmarketplace.apphb.com/api/Projects/UsersApplied/' + $scope.IdProject).success(function (data) {
                         $scope.applicants = data;
                         angular.forEach($scope.applicants, function (value) {
@@ -79,10 +80,6 @@ projectApp.controller('ProjectController',
                     alert("Erreur du chargement des postulants au projet.");
                 });
             }
-            $scope.currentLeader = $scope.IdCurrentUser === $scope.leaderProject.UniqId ? true : false;
-            console.log($scope.IdCurrentUser);
-            console.log($scope.leaderProject.Id);
-            console.log($scope.currentLeader);
         });
 
 // Controller pour l'ouverture des différentes pop-up
