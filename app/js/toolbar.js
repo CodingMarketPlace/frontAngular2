@@ -135,9 +135,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             headers: {'Content-Type': undefined },
             transformRequest: angular.identity
         }).success(function(data) {
-            console.log("ok");
         }).error(function() {
-            console.log("not ok");
         });
     };
 
