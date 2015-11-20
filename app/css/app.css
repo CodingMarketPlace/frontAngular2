@@ -6,6 +6,11 @@
     cursor: pointer;
 }
 
+.no-margin
+{
+    margin: 0;
+}
+
 /**********/
 
 .thumb {
@@ -161,7 +166,7 @@ md-content {
 
 /** ACCOUNT CSS **/
 .account {
-    width: 75%;
+    width: 85%;
     margin: 1% auto auto auto;
     background: #fff;
 }
