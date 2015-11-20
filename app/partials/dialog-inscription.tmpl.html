@@ -83,6 +83,9 @@
                     <textarea ng-model="description" placeholder="Description"></textarea>
                 </md-input-container>
             </span>
+            <span layout-gt-sm="row" layout-wrap>
+                <label>Photo de profil</label><input type="file" name="Télécharger un fichier" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+            </span>
             <span layout-gt-sm="row">
                 <div id="g_recaptcha"></div>
             </span>

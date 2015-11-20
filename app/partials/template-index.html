@@ -95,6 +95,7 @@
 		<div class="clearfix"></div>
 	</div>
 
+<<<<<<< HEAD
 	<!-- Testimonials -->
 	<div class="testimonials-section">
 		<div class="testimonials-container">
@@ -111,3 +112,74 @@
 		</div>
 	</div>
 </div>
+=======
+            <div class="item">
+                <img src="img/relation_pro.jpg" alt="Relation professionnel">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="qualitysite" 
+     layout="row" 
+     layout-sm="column" 
+     layout-md="column"
+     layout-margin 
+     layout-padding 
+     layout-wrap 
+     style="text-align:center;">
+    <!--<md-button ng-href="#/projects" href="projects">projets</md-button>-->
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/relation.jpg"/>
+        <p>Un réseau unique de professionnels aguéris</p>
+    </div>
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/search.jpg"/>
+        <p>Un recrutement simple et plus rapide</p>
+    </div>
+    <div flex layout-align="center center">
+        <img class="roundedMediumImage" src="img/rocket.jpg"/>
+        <p>Un tremplin vers la réussite de votre projet</p>
+    </div>
+</div>
+
+<div flex layout="row" 
+     layout-sm="column" 
+     layout-md="column"
+     layout-align="center center" 
+     id="inscriptionBar" 
+     ng-controller="ToolbarCtrl">
+    <h2 style="color: white;text-align: center;">Venez proposer votre projet.</h2>
+    <md-button class="md-raised md-primary" 
+               ng-click="showDialogInscription($event)"
+               ng-if="loggedIn !== true">
+        Inscrivez-vous
+    </md-button>
+</div>
+
+<div layout-gt-sm="row" 
+     layout-padding 
+     layout-wrap 
+     id="testimonial">
+
+    <div flex="25" flex-sm="100" flex-md="25">
+        <img flex 
+             layout-margin
+             layout-align="center center" 
+             class="roundedTallImage" 
+             src="img/temoignage.jpg"/>
+    </div>
+    <div flex="75" 
+         flex-md="75"
+         flex-sm="100" 
+         layout="column" 
+         layout-align="center center">
+        J'avais besoin de quelqu'un pour créer un site d'e-commerce.
+        Je l'ai trouvé en moins de 2 jours !
+    </div>
+
+</div>
+
+<!--</md-card>-->
+>>>>>>> 5394c2bcac3bcc514fbbb281998a0ad02092ec64

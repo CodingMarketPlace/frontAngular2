@@ -20,7 +20,7 @@
                 <span><a href="#/">Coding Market Place</a></span>
             </h2>
             <span flex></span>
-            <md-input-container style="margin-bottom: 0px;" 
+            <md-input-container style="margin-bottom: 0px;margin-top: 10px;" 
                                 ng-if="loggedIn === true && !screenIsSmall">
                 <input ng-model="input.searchText"
                        placeholder="Rechercher un projet">
@@ -32,9 +32,15 @@
             </md-icon>
             <span flex></span>
             <md-button 
+                aria-label="Gestion Admin" 
+                ng-click="goAdmin()"
+                ng-if="loggedIn === true && !screenIsSmall && isAdmin">
+                Gestion Admin
+            </md-button>
+            <md-button 
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true && !screenIsSmall">
+                ng-if="loggedIn === true && !screenIsSmall && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
@@ -43,7 +49,6 @@
                 ng-if="loggedIn === true && !screenIsSmall">
                 Mon compte
             </md-button>
-            
             <md-button 
                 aria-label="Connexion" 
                 ng-click="showDialogConnect($event)" 
@@ -82,9 +87,16 @@
             <span flex></span>
             <md-button 
                 style="width:100%;"
+                aria-label="Gestion Admin" 
+                ng-click="goAdmin()"
+                ng-if="loggedIn === true && isAdmin">
+                Gestion Admin
+            </md-button>
+            <md-button 
+                style="width:100%;"
                 aria-label="Créer un projet" 
                 ng-click="showDialogProjectCreate($event)"
-                ng-if="loggedIn === true">
+                ng-if="loggedIn === true && isProjectLeader">
                 Créer un projet
             </md-button>
             <md-button 
@@ -122,8 +134,8 @@
     </md-content>
 
     <div flex>
-        <footer>
-            <a href="">Contactez-nous !</a>
+        <footer ng-controller="FooterCtrl">
+            <a ng-click="showDialogContact($event)">Contactez-nous !</a>
             <a href="#/legal-notice">Mentions légales</a>
             <div>Conding Market Place - © PREB S.A.S.</div>
         </footer>
@@ -145,5 +157,6 @@
     <script src="js/project.js"></script>
     <script src="js/user.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>

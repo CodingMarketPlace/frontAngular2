@@ -6,7 +6,7 @@
              layout-padding 
              layout-wrap>
             <img class="roundedMediumImage" 
-                 src="http://www.journaldugeek.com/files/2014/04/infographie_profil_internautes_europ%C3%A9ens-600x375.jpg" 
+                 src="{{user.ImageUrl}}" 
                  flex-gt="50" 
                  flex-sm="100">
             <div layout="column" layout-wrap flex>
@@ -33,7 +33,7 @@
                      layout-wrap 
                      flex 
                      style="margin-top: 80px;" 
-                     ng-if="screenSmall">
+                     ng-if="screenSmall && myAccount === true">
                     <div ng-if="verif_password !== password">
                         <p class="error">Erreurs : Les mots de passe doivent être identiques</p>
                     </div>
@@ -62,7 +62,7 @@
                  layout-wrap 
                  flex 
                  style="margin-top: 80px;" 
-                 ng-if="!screenSmall">
+                 ng-if="!screenSmall && myAccount === true">
                 <md-input-container flex="50">
                     <label>Mot de passe *</label>
                     <md-icon md-svg-src="img/icons/password.svg" 
@@ -85,8 +85,8 @@
 <div class="account md-whiteframe-z1" 
      layout-margin 
      layout-padding 
-     layout-wrap 
-     ng-controller="ProjectController">
+     layout-wrap
+     ng-if="isDevelopper">
     <h2>Projets en cours</h2>
     <h3>{{user.FirstName}} postule actuellement pour les projets suivants :</h3>
     <div layout-gt-sm="column">
@@ -94,7 +94,7 @@
              layout-margin 
              layout-padding 
              layout-wrap 
-             ng-repeat="projet in projects" | filter:query >
+             ng-repeat="projet in projects| filter: {over: false}" >
             <img src="{{projet.ImageUrl}}" 
                  flex-gt="50" 
                  flex-sm="100">
@@ -120,16 +120,16 @@
 <div class="account md-whiteframe-z1" 
      layout-margin 
      layout-padding 
-     layout-wrap 
-     ng-controller="ProjectController">
+     layout-wrap
+     ng-if="isDevelopper">
     <h2>Projets terminés</h2>
-    <h3>{{user.firstName}} a réalisé les projets suivants :</h3>
+    <h3>{{user.FirstName}} a réalisé les projets suivants :</h3>
     <div layout-gt-sm="column">
         <div layout-gt-sm="row" 
              layout-margin 
              layout-padding 
              layout-wrap 
-             ng-repeat="projet in projects" | filter:query >
+             ng-repeat="projet in projects| filter: {over: true}" >
             <img src="{{projet.ImageUrl}}" 
                  flex-gt="50" 
                  flex-sm="100">

@@ -12,8 +12,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     
     $test = $cookies.get('loggedIn');
     $rootScope.loggedIn = ($test === "true");
-    console.log($rootScope.loggedIn);
     
+    //$scope.user.UniqId = $cookies.get('user_UniqId') === "true" ? true : false;
 
     $scope.erreurLogin = false;
     
@@ -35,6 +35,14 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.showMobileMainHeader = true;
     $scope.screenIsSmall = $mdMedia('sm');
 
+    $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
+    $rootScope.isDevelopper = $cookies.get('user_Developper') === "true" ? true : false;
+    $rootScope.isProjectLeader = $cookies.get('user_ProjectCreator') === "true" ? true : false;
+
+    $scope.goAdmin = function() {
+        $location.path('admin');
+    };
+
     $scope.user = {
         Login: $cookies.get('user_login') || undefined,
         Password: undefined,
@@ -46,12 +54,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         Activated: undefined,
         Admin: $cookies.get('user_Admin') === "true" ? true : false || undefined,
         Description: undefined,
-        UniqId: $cookies.get('user_UniqId') === "true" ? true : false || undefined,
+        UniqId: $cookies.get('user_UniqId'),
         ImageUrl: undefined,
         ProjectCreator: $cookies.get('user_ProjectCreator') === "true" ? true : false || undefined
     };
 
-
+    $rootScope.user = $scope.user;
 
 //    $scope.login = undefined;
 //    $scope.password = undefined;
@@ -85,10 +93,10 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
             $cookies.put('user_ProjectCreator', projectCreatorStr);
             $cookies.put('user_Admin', Admin);
             $cookies.put('user_Developper', Developper);
+            $rootScope.isAdmin = $cookies.get('user_Admin') === "true" ? true : false;
             $scope.hide();
         }).error(function (data) {
             $scope.erreurLogin = true;
-            console.log("failure message: " + JSON.stringify({data: data}));
         });
     };
 
@@ -96,18 +104,18 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     $scope.logOut = function () {
         $rootScope.loggedIn = false;
         $scope.user = undefined;
-        console.log($rootScope.loggedIn);
         $cookies.put('loggedIn', $rootScope.loggedIn);
         $cookies.put('user', $scope.user);
+        $cookies.put('user_Developper', "false");
+        $cookies.put('user_Admin', "false");
+        $cookies.put('user_ProjectCreator', "false");
+        $rootScope.isAdmin = false;
         $location.path('#/');
     };
 
     // Recherche d'un project
     $scope.search = function () {
-        console.log('scope : ' + $scope.input.searchText);
-        console.log($location.path());
         $location.path('search-projects/' + $scope.input.searchText);
-        console.log($location.path());
     };
 
     // Accès à mon compte
@@ -115,11 +123,30 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('user/' + $rootScope.user['UniqId']);
     };
 
+    $scope.uploadFile = function(files) {
+        var fd = new FormData();
+        //Take the first selected file
+        fd.append("file", files[0]);
+
+        $http.post("img/test.jpg", fd, {
+            withCredentials: true,
+            headers: {'Content-Type': undefined },
+            transformRequest: angular.identity
+        }).success(function(data) {
+            console.log("ok");
+        }).error(function() {
+            console.log("not ok");
+        });
+    };
+
     // Création d'un project
     $scope.createProject = function () {
         var project = {ID: 0, Title: $scope.project.projectName, Description: $scope.project.description, Duration: $scope.project.projectDelay, Budget: $scope.project.projectBudget, IdUser: 0, ImageUrl: '', CreationDate: ''};
         
-        $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/', project);
+        $http.post('http://codingmarketplace.apphb.com/api/Projects/Create/' + $rootScope.user['UniqId'], project).success(function(data) {
+            $scope.hide();
+            alert('Le projet a été créé avec succès');
+        });
     };
 
     // Validation des informations d'inscription
@@ -156,7 +183,6 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
                     $scope.connection();
                 },
                 error: function (resultat, status) {
-                    console.log(resultat);
                 }
             });
         }
@@ -165,16 +191,12 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
     // Affectation de valeurs suivant le rôle sélectionné
     $scope.selectChange = function () {
         if ($scope.typeaccount === '1') {
-            console.log("1");
             $scope.inscriptionProjectCreator = true;
             $scope.inscriptionDevelopper = false;
         } else if ($scope.typeaccount === '2') {
-            console.log("2");
             $scope.inscriptionProjectCreator = false;
             $scope.inscriptionDevelopper = true;
         }
-        console.log($scope.inscriptionDevelopper);
-        console.log($scope.inscriptionProjectCreator);
     };
 
     // Affichage d'un alert ou pop-up
