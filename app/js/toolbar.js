@@ -115,6 +115,8 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         $location.path('#/');
     };
 
+    $rootScope.ImageUrlSaved = "";
+
     // Recherche d'un project
     $scope.search = function () {
         $location.path('search-projects/' + $scope.input.searchText);
