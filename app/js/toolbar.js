@@ -82,6 +82,7 @@ toolbarApp.controller('ToolbarCtrl', function ($scope, $rootScope, $mdDialog, $h
         var identification = {password: $scope.user.password, login: $scope.user.mail};
         $http.post('http://codingmarketplace.apphb.com/api/Users/Login', identification).success(function (data) {
             $scope.user = data;
+            console.log($scope.user);
             $rootScope.user = $scope.user;
             $rootScope.loggedIn = true;
             $cookies.put('loggedIn', $rootScope.loggedIn);
